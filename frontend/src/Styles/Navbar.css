@@ -1,0 +1,88 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background-color: #fae9f2;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 80px;
+  width: auto;
+  margin-right: 12px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.brand-sub {
+  font-size: 0.85rem;
+  color: #b79ad2;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 24px;
+  margin-left: 48px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #9b42e5;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #9b42e5;
+  color: white;
+  border-radius: 9999px;
+  padding: 6px 12px;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+  width: 150px;
+  
+}
+.search-bar input::placeholder {
+  color: white;
+  opacity: 1; 
+}
+
+
+.navbar-icon {
+  color: #9b42e5;
+  font-size: 24px;
+  cursor: pointer;
+}
