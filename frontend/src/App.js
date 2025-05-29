@@ -1,15 +1,21 @@
+// src/App.js
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
-import ChatBot from './Components/Chatbot';
+import Home from './Pages/Home';
+
+import Chatbot from './Components/Chatbot';
 
 function App() {
-  console.log("App component loaded"); // Add this
-
   return (
-    <div>
+    <>
       <Navbar />
-      <ChatBot />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        
+        <Route path="/chatbot" element={<Chatbot />} />
+      </Routes>
+    </>
   );
 }
 
