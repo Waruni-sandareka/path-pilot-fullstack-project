@@ -1,0 +1,270 @@
+body {
+  background-color: rgb(242, 232, 253);
+  margin: 0;
+  overflow-x: hidden; /* ✅ Prevent horizontal scrolling */
+}
+
+.welcome-circle-container {
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: center; /* Aligns items in the center vertically */
+    width: 95%;
+    padding: 20px 40px; /* Adjust padding as needed */
+}
+
+/* Welcome Text - Align Left */
+.welcome-text {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0; 
+}
+
+/* Circles - Align Right */
+.circle-container {
+    display: flex;
+    gap: 35px; 
+}
+body{
+    background-color: rgb(242, 232, 253);
+  }
+
+/* Individual Circle Styling */
+.circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #744B93;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Half-Cut Oval Shape */
+.oval-shape {
+    position: absolute;
+    width: 690px;
+    height: 390px;
+    background-color: #d1b3ff; 
+    border-radius: 50%;
+    left: -160px;
+    top: 170px;
+    z-index: -10;
+}
+
+
+
+/* Career Guidance Text */
+.career-text {
+    color: #744B93;
+    font-size: 65px; 
+    margin-top: 5px;
+    line-height: 1.1;
+    margin-left: 30px;
+}
+.image-section {
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%; 
+    padding-left:630px;
+    margin-top: -200px;}
+/* Image Styling */
+.big-image {
+    height: 300px;
+    width: 700px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.explore-button {
+    background-color: #9448F2; 
+    color: white;
+    font-size: 20px;
+    padding: 13px 50px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+    margin-left: 100px;
+}
+
+.explore-button:hover {
+    background-color: #5a3475; 
+}
+.Titleour {
+    font-size: 60px;
+    font-weight: bold;
+    color: #B79AD2;
+    text-align: center;
+    padding-top: 20px;
+  }
+  
+  .Titleservices {
+    font-size: 50px;
+    font-weight: bold;
+    color: #4B2F61; 
+  }
+  .service-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px; 
+    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.service-image img {
+    width: 373px; 
+    height: 437px;
+    margin-left: 100px;
+   
+}
+
+.service-text {
+    max-width: 600px;
+   
+    
+
+.service-title {
+    font-size: 27px;
+    color: #3D1F99; 
+    padding: 20px 50px;
+    margin-left: 100px;
+    
+}
+
+.service-description {
+    color: #666;
+    font-size: 16px;
+    margin-left: 100px;
+}
+
+.read-more-btn {
+    background-color: #9448F2;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 260px;
+}
+
+.read-more-btn:hover {
+    background-color: #5a3475;
+}
+}
+.dash-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px; 
+    padding-top: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.dash-image img {
+    width: 592px; 
+    height: 541px;
+    margin-left: 100px;
+   
+}
+
+.dash-text {
+    max-width: 600px;
+   
+    
+
+.dash-title {
+    font-size: 27px;
+    color: #3D1F99; 
+    padding: 20px 50px;
+    margin-left: 100px;
+    text-align: center;
+    
+}
+
+.dash-description {
+    color: #666;
+    font-size: 16px;
+    margin-left: 100px;
+    text-align: justify;
+}
+
+.read-more-btn {
+    background-color: #9448F2;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 230px;
+}
+
+.read-more-btn:hover {
+    background-color: #5a3475;
+}
+}
+.skill-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px; 
+    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.skill-image img {
+    width: 373px; 
+    height: 437px;
+    margin-left: 100px;
+   
+}
+
+.skill-text {
+    max-width: 600px;
+   
+    
+
+.skill-title {
+    font-size: 27px;
+    color: #3D1F99; 
+    padding: 20px 50px;
+    margin-left: 100px;
+    
+}
+
+.skill-description {
+    color: #666;
+    font-size: 16px;
+    margin-left: 100px;
+}
+
+.read-more-btn {
+    background-color: #9448F2;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 260px;
+}
+
+.read-more-btn:hover {
+    background-color: #5a3475;
+}}
