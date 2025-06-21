@@ -86,3 +86,16 @@
   font-size: 24px;
   cursor: pointer;
 }
+.navbar-links a,
+.navbar-links .nav-link {
+  color: inherit;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.navbar-links a:hover,
+.navbar-links .nav-link:hover {
+  color: #5a3d99; /* Whatever hover color you use for links like Dashboard */
+}

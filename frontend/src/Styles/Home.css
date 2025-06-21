@@ -267,4 +267,40 @@ body{
 
 .read-more-btn:hover {
     background-color: #5a3475;
-}}
+}/* Modal Styles */
+}
+/* MODAL Styles */
+.modal-overlay {
+  position: fixed;           /* IMPORTANT for overlay effect */
+  top: 0;
+  left: 0;
+  width: 100vw;              /* Cover the whole viewport */
+  height: 100vh;
+  background-color: rgba(243, 229, 243, 0.8); /* Semi-transparent light purple backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;            /* Higher than any page elements */
+}
+
+.modal-content {
+  background: #fff;          /* White background */
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  text-align: left;
+  position: relative;
+}
+
+.close-button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #9448F2;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+}
+.close-button:hover {
+  background-color: #5a3475;
+}
