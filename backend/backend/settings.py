@@ -112,7 +112,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HUGGINGFACE_API_KEY = config('HUGGINGFACE_API_KEY')
+#HUGGINGFACE_API_KEY = config('HUGGINGFACE_API_KEY')
 
 INSTALLED_APPS += ['corsheaders']
 MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
