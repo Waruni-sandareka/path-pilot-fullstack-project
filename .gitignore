@@ -2,4 +2,35 @@ node_modules
 node_modules
 node_modules
 node_modules
-backend/backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+env/
+/home/waruni/path-pilot-full-stack-project/backend/backend/.env
+
+# Django
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# Environment variables
+.env
+
+# VSCode or JetBrains IDE
+.vscode/
+.idea/
+
+# Node.js (if applicable for your frontend)
+node_modules/
+
