@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 
-MODEL_PATH = "/home/waruni/path-pilot-full-stack-project/backend/path_pilot_app/models/flan-t5-small-finetuned"
+MODEL_PATH = "/home/waruni/path-pilot-full-stack-project-new/path-pilot-fullstack-project/backend/path_pilot_app/models/flan-t5-small-finetuned"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
 model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
