@@ -35,3 +35,5 @@ backend/backend/__pycache__/
 backend/backend/__pycache__/*.pyc
 backend/path_pilot_app/__pycache__/
 backend/path_pilot_app/__pycache__/*.pyc
+
+models/
