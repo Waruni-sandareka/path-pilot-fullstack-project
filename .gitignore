@@ -1,7 +1,4 @@
 node_modules
-node_modules
-node_modules
-node_modules
 
 # Python
 __pycache__/
@@ -30,7 +27,4 @@ db.sqlite3
 # VSCode or JetBrains IDE
 .vscode/
 .idea/
-
-# Node.js (if applicable for your frontend)
-node_modules/
 
