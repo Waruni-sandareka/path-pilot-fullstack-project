@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from path_pilot_app.views import chatbot_response
+from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/chatbot/', chatbot_response),
+    path("admin/", admin.site.urls),
+    path("api/", include("path_pilot_app.urls")),  
 ]
