@@ -29,3 +29,5 @@ db.sqlite3
 .idea/
 
 backend/backend/__pycache__
+__pycache__/
+*.pyc
