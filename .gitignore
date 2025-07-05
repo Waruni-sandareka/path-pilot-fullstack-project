@@ -1,7 +1,4 @@
 node_modules
-node_modules
-node_modules
-node_modules
 
 # Python
 __pycache__/
@@ -31,6 +28,10 @@ db.sqlite3
 .vscode/
 .idea/
 
-# Node.js (if applicable for your frontend)
-node_modules/
-
+backend/backend/__pycache__
+__pycache__/
+*.pyc
+backend/backend/__pycache__/
+backend/backend/__pycache__/*.pyc
+backend/path_pilot_app/__pycache__/
+backend/path_pilot_app/__pycache__/*.pyc
