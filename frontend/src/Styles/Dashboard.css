@@ -1,0 +1,120 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f7f7f7;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar Menu */
+.menu {
+  list-style-type: none;
+  padding: 0;
+  color: #e7b2df;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #261631;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.menu-item .icon {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #5a3475;
+}
+
+.menu-item:hover {
+  background: #f5f5f5;
+  border-radius: 5px;
+  color: #be64da;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #E9D8FD;
+  border-radius: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 1024px;
+  margin: 24px auto;
+}
+
+/* Image and Heading Group */
+.image-and-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 24px;
+}
+
+.dashboard-img {
+  display: block;
+  max-width: 550px;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.dashboard-h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: #5a3475;
+  text-align: center;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+/* Content Box */
+.content-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #2d2d2d;
+}
+
+.content-box p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: #333333;
+  text-align: justify;
+}
+
+.content-box button {
+  background-color: #fdfdf2;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.content-box button:hover {
+  background-color: #f3f3db;
+}
