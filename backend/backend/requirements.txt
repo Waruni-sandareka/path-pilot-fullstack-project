@@ -1,0 +1,6 @@
+django-extensions
+django
+python-decouple
+django-cors-headers
+transformers
+torch
