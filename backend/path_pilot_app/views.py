@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .utils.model_loader import generate_answer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 import json
@@ -85,3 +87,19 @@ def login_user(request):
         except Exception as e:
             logger.error(f"❌ Error in login_user: {e}")
             return Response({'error': 'Something went wrong'}, status=500)
+        
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_details(request):
+    logger.info("🔧 user_details view triggered")
+    try:
+        user = request.user  # Authenticated user from token
+        logger.info(f"🔐 Retrieved user: {user.username}")
+        return Response({
+            'username': user.username,
+            'email': user.email,
+        })
+    except Exception as e:
+        logger.error(f"❌ Error in user_details: {e}")
+        return Response({'error': 'Something went wrong'}, status=500)
