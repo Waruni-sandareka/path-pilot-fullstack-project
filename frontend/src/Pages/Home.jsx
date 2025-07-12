@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'; // ✅ Correct
+import React, { useRef } from 'react';
 
 import { Link } from "react-router-dom";
-import Navbar from "../Components/Navbar"; // ✅ Correct for your custom Navbar
+import Navbar from "../Components/Navbar"; 
 
 import img from "../assets/img/home2.png";
 import ourservicebot from "../assets/img/ourservicesbot.png";

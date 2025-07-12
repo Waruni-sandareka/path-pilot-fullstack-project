@@ -3,3 +3,10 @@ __pycache__/
 *.pyc
 models/
 venv/
+*.log
+*.sqlite3
+db.sqlite3
+migrations/
+# OS generated files
+.DS_Store
+Thumbs.db
