@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaBook, FaRobot, FaHeart } from 'react-icons/fa';
+import Sidebar from '../Components/Sidebar'; // Import the new Sidebar component
 import "../Styles/Dashboard.css"; 
 import dashboardImage from "../assets/img/dashbordimg.png";
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,6 @@ function Dashboard() {
   const [username, setUsername] = useState('User'); // Default username
 
   useEffect(() => {
-    // Fetch user details when component mounts
     const fetchUserDetails = async () => {
       const token = localStorage.getItem('token');
       if (token) {
@@ -18,13 +17,13 @@ function Dashboard() {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Token ${token}`, // Pass token in Authorization header
+              'Authorization': `Token ${token}`,
             },
           });
 
           const data = await response.json();
           if (response.ok) {
-            setUsername(data.username || 'User'); // Update username from response
+            setUsername(data.username || 'User');
           } else {
             console.error('Failed to fetch user details:', data);
           }
@@ -35,34 +34,11 @@ function Dashboard() {
     };
 
     fetchUserDetails();
-  }, []); // Empty dependency array means it runs once on mount
+  }, []);
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <nav>
-          <ul className="menu">
-            <li className="menu-item" onClick={() => navigate("/")}>
-              <FaHome className="icon" />
-              <span>Home</span>
-            </li>
-            <li className="menu-item">
-              <FaBook className="icon" />
-              <span>Academic Records</span>
-            </li>
-            <li className="menu-item" onClick={() => navigate("/chatbot")}>
-              <FaRobot className="icon" />
-              <span>ChatBot</span>
-            </li>
-            <li className="menu-item">
-              <FaHeart className="icon" />
-              <span>Help</span>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      {/* Main Content */}
+      <Sidebar /> {/* Use the Sidebar component */}
       <div
         style={{
           flexGrow: 1,
@@ -90,10 +66,9 @@ function Dashboard() {
             }} 
           />
           <h2 className="dashboard-greeting">
-            Hi, {username} {/* Dynamically display username */}
+            Hi, {username}
           </h2>
         </div>
-        {/* Text & Button */}
         <div className="content-box">
           <h2>Welcome!</h2><br /><br />
           <p>
