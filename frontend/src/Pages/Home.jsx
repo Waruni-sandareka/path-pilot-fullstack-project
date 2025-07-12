@@ -58,8 +58,8 @@ const Home = () => {
 
       {/* Explore Button */}
       <p></p><p></p><p></p><p></p>
-      <Link to="/explore">
-        <button className="explore-button">Explore Now</button>
+      <Link to="/register">
+        <button className="explore-button">Sign Up</button>
       </Link>
 
       {/* Our Services Section */}

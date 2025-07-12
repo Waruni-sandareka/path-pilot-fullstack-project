@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaHome, FaBook, FaRobot, FaHeart } from 'react-icons/fa';
 import "../Styles/Dashboard.css"; 
-import dashboardImage from "../assets/img/dashimage.png";
+import dashboardImage from "../assets/img/dashbordimg.png";
 import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
