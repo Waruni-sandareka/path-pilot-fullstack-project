@@ -5,7 +5,6 @@ import "../Styles/Dashboard.css";
 import profileImage from "../assets/img/profileimg.png"; 
 
 function UserProfile() {
-  // Static mock data
   const userData = {
     username: 'johndoe',
     fullName: 'John Doe',
@@ -20,22 +19,29 @@ function UserProfile() {
   };
 
   return (
-    <div className="dashboard-container">
-      <Sidebar /> 
+    <div className="dashboard-container" style={{ display: 'flex' }}>
+      <Sidebar />
       <div
         style={{
           flexGrow: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '24px',
-          maxWidth: '1030px',
-          margin: 'auto',
-          minHeight: '600px',
+          padding: '32px',
+          backgroundColor: '#f5f5f5',
+          minHeight: '120vh',
         }}
       >
-        {/* User Profile Image */}
-        <div style={{ marginBottom: '24px' }}>
+        <div
+          style={{
+            backgroundColor: '#D0ADC4',
+            borderRadius: '16px',
+            padding: '32px',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+            maxWidth: '1000px',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <img
             src={profileImage}
             alt="User Profile"
@@ -44,68 +50,67 @@ function UserProfile() {
               height: '150px',
               borderRadius: '50%',
               objectFit: 'cover',
+              marginBottom: '20px',
+              border: '4px solid #744B93',
             }}
           />
-        </div>
 
-        {/* Student Basic Information */}
-        <div style={{ width: '100%', maxWidth: '800px' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            <FaUserGraduate style={{ marginRight: '8px' }} /> Basic Information
-          </h2>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
-            <div style={{ flex: 1, marginRight: '16px' }}>
-              <p><strong>Full Name:</strong> {userData.fullName}</p>
-              <p><strong>Username:</strong> {userData.username}</p>
+          {/* Basic Info */}
+          <Section title="Basic Information" icon={<FaUserGraduate />}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px' }}>
+              <div style={{ flex: 1 }}>
+                <p><strong>Full Name:</strong> {userData.fullName}</p>
+                <p><strong>Username:</strong> {userData.username}</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p><strong>Education Level:</strong> {userData.educationLevel}</p>
+                <p><strong>Institution:</strong> {userData.institution}</p>
+                <p><strong>Location:</strong> {userData.location}</p>
+                <p><strong>Graduation Year:</strong> {userData.graduationYear}</p>
+              </div>
             </div>
-            <div style={{ flex: 1 }}>
-              <p><strong>Education Level:</strong> {userData.educationLevel}</p>
-              <p><strong>Institution:</strong> {userData.institution}</p>
-              <p><strong>Location:</strong> {userData.location}</p>
-              <p><strong>Graduation Year:</strong> {userData.graduationYear}</p>
+          </Section>
+
+          {/* Field of Study */}
+          <Section title="Field of Study" icon={<FaBook />}>
+            <p>Computer Science</p>
+          </Section>
+
+          {/* Skills */}
+          <Section title="Skills" icon={<FaTools />}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px' }}>
+              <div style={{ flex: 1 }}>
+                <p><strong>Technical Skills:</strong> {userData.technicalSkills.join(', ')}</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p><strong>Soft Skills:</strong> {userData.softSkills.join(', ')}</p>
+              </div>
             </div>
-          </div>
-        </div>
+          </Section>
 
-        {/* Field of Study */}
-        <div style={{ width: '100%', maxWidth: '800px', marginTop: '24px' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            <FaBook style={{ marginRight: '8px' }} /> Field of Study
-          </h2>
-          <p style={{ marginTop: '8px' }}>Computer Science</p> {/* Placeholder data */}
-        </div>
+          {/* Career Interests */}
+          <Section title="Career Interests and Goals" icon={<FaLightbulb />}>
+            <p>{userData.careerInterests}</p>
+          </Section>
 
-        {/* Skills */}
-        <div style={{ width: '100%', maxWidth: '800px', marginTop: '24px' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            <FaTools style={{ marginRight: '8px' }} /> Skills
-          </h2>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '16px' }}>
-            <div style={{ flex: 1, marginRight: '16px' }}>
-              <p><strong>Technical Skills:</strong> {userData.technicalSkills.join(', ')}</p>
-            </div>
-            <div style={{ flex: 1 }}>
-              <p><strong>Soft Skills:</strong> {userData.softSkills.join(', ')}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Career Interests and Goals */}
-        <div style={{ width: '100%', maxWidth: '800px', marginTop: '24px' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            <FaLightbulb style={{ marginRight: '8px' }} /> Career Interests and Goals
-          </h2>
-          <p style={{ marginTop: '8px' }}>{userData.careerInterests}</p>
-        </div>
-
-        {/* Connected Platforms */}
-        <div style={{ width: '100%', maxWidth: '800px', marginTop: '24px' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center' }}>
-            <FaGlobe style={{ marginRight: '8px' }} /> Connected Platforms
-          </h2>
-          <p style={{ marginTop: '8px' }}>{userData.connectedPlatforms.join(', ')}</p>
+          {/* Connected Platforms */}
+          <Section title="Connected Platforms" icon={<FaGlobe />}>
+            <p>{userData.connectedPlatforms.join(', ')}</p>
+          </Section>
         </div>
       </div>
+    </div>
+  );
+}
+
+function Section({ title, icon, children }) {
+  return (
+    <div style={{ width: '100%', marginBottom: '32px' }}>
+      <h2 style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', color: '#4b2f61' }}>
+        {icon}
+        <span style={{ marginLeft: '8px' }}>{title}</span>
+      </h2>
+      <div>{children}</div>
     </div>
   );
 }
