@@ -31,6 +31,10 @@ function Sidebar() {
             <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
             <span>Profile</span>
           </li>
+          <li className="menu-item" onClick={() => navigate("/resume")}>
+            <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
+            <span>Resume Builder</span>
+          </li>
         </ul>
       </nav>
     </aside>
