@@ -5,6 +5,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
+from django.template.loader import render_to_string
+from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from weasyprint import HTML
+from django.http import HttpResponse, JsonResponse
 import json
 import logging
 
@@ -16,9 +20,19 @@ from django.contrib.auth.hashers import make_password
 from .models import User
 from .serializers import UserSerializer
 from .serializers import LoginSerializer
+from rest_framework.renderers import BaseRenderer
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
+
+class PDFRenderer(BaseRenderer):
+    media_type = 'application/pdf'
+    format = 'pdf'
+    charset = None
+    render_style = 'binary'
+
+    def render(self, data, accepted_media_type=None, renderer_context=None):
+        return data
 
 @csrf_exempt
 def chatbot_response(request):
@@ -103,3 +117,27 @@ def user_details(request):
     except Exception as e:
         logger.error(f"❌ Error in user_details: {e}")
         return Response({'error': 'Something went wrong'}, status=500)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@renderer_classes([PDFRenderer])
+def generate_resume(request):
+    logger.info("🔧 generate_resume view triggered")
+    try:
+        user = request.user
+        logger.info(f"🔐 Generating resume for user: {user.username}")
+
+        html_string = render_to_string('resume_template.html', {
+            'user': user,
+        })
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="resume_{user.username}.pdf"'
+        response['Content-Type'] = 'application/pdf'
+        HTML(string=html_string).write_pdf(response)
+        return response
+    except Exception as e:
+        logger.error(f"❌ Error in generate_resume: {str(e)}")
+        logger.error(f"❌ Request headers: {dict(request.headers)}")
+        return Response({'error': str(e)}, status=500)
