@@ -7,6 +7,8 @@ import Chatbot from './Components/Chatbot';
 import Login from './Pages/login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
+import UserProfile from './Pages/UserProfile';
+import ResumeBuilder from './Pages/ResumeBuilder';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/resume" element={<ResumeBuilder />} />
       </Routes>
     </>
   );

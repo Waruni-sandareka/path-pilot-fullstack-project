@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ user.username }}</h1>
+    <div class="contact-info">
+        <p>Email: {{ user.email }}</p>
+    </div>
+    <div class="section">
+        <h2>Summary</h2>
+        <p>Professional individual seeking opportunities to leverage skills and experience.</p>
+    </div>
+</body>
+</html>
