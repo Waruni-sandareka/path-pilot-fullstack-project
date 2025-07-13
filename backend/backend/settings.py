@@ -40,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -120,6 +121,8 @@ INSTALLED_APPS += ['corsheaders']
 MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
 CORS_ALLOW_ALL_ORIGINS = True  # For dev only; restrict in prod
 
+CORS_ALLOW_CREDENTIALS = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -135,4 +138,16 @@ AUTH_USER_MODEL = 'path_pilot_app.User'
 AUTHENTICATION_BACKENDS = [
     'path_pilot_app.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend', 
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'authorization',
+    'content-type',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'OPTIONS',
 ]
