@@ -76,7 +76,9 @@ function Dashboard() {
             form with your subjects, interests, and skills, and let our AI analyze your
             academic strengths to guide your future career.
           </p> <br /><br />
-          <button>Get Started !</button>
+          <button onClick={() => navigate('/form')}>
+  Get Started!
+</button>
         </div>
       </div>
     </div>
