@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../Components/Sidebar'; // Import the new Sidebar component
+import Sidebar from '../Components/Sidebar'; 
 import "../Styles/Dashboard.css"; 
 import dashboardImage from "../assets/img/dashbordimg.png";
 import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('User'); // Default username
+  const [username, setUsername] = useState('User'); 
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -38,7 +38,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <Sidebar /> {/* Use the Sidebar component */}
+      <Sidebar /> 
       <div
         style={{
           flexGrow: 1,

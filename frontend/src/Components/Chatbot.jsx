@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../Styles/Chatbot.css';
+import Sidebar from '../Components/Sidebar';
 
 const ChatBot = () => {
   const [messages, setMessages] = useState([
@@ -56,6 +57,7 @@ const ChatBot = () => {
 
   return (
     <div className="chat-container">
+      <Sidebar /> 
       <div className="chat-box">
         <div className="chat-messages">
           {messages.map((msg, index) => (
