@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaHome, FaBook, FaRobot, FaHeart } from 'react-icons/fa';
+import { FaHome, FaBook, FaRobot, FaHeart, FaChartLine} from 'react-icons/fa';
 import "../Styles/Dashboard.css"; 
 import dashboardImage from "../assets/img/dashimage.png";
 import { useNavigate } from 'react-router-dom';
@@ -55,6 +55,11 @@ function Dashboard() {
               <FaRobot className="icon" />
               <span>ChatBot</span>
             </li>
+            <li className="menu-item" onClick={() => navigate("/trends")}>
+              <FaChartLine className="icon" />
+              <span>Trends</span>
+            </li>
+
             <li className="menu-item">
               <FaHeart className="icon" />
               <span>Help</span>
