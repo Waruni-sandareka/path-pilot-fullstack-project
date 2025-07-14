@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 32px;
+  font-weight: 400;
+  font-size: 1.2rem;
   background-color: #fae9f2;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -21,12 +23,13 @@
 .brand-text {
   display: flex;
   flex-direction: column;
+  
 }
 
 .brand-name {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #222;
+  color: #370a38;
 }
 
 .brand-sub {
@@ -36,8 +39,8 @@
 
 .navbar-links {
   display: flex;
-  gap: 24px;
-  margin-left: 48px;
+  gap: 35px;
+  margin-left: 100px;
 }
 
 .navbar-links a {
@@ -56,28 +59,42 @@
   align-items: center;
   gap: 15px;
 }
-
 .search-bar {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  align-items: center; /* Vertically center icon and input */
+  gap: 10px;
   background-color: #9b42e5;
   color: white;
-  border-radius: 9999px;
-  padding: 6px 12px;
+  border-radius: 100px;
+  padding: 6px 14px;
+  height: 30px; /* Fixed height */
+}
+
+.search-bar svg {
+  flex-shrink: 0; /* Prevent icon from shrinking */
+  height: 24px;
+  width: 24px;
+  color: white;
 }
 
 .search-bar input {
-  border: none;
+  flex: 1;
   background: transparent;
-  color: white;
+  border: none;
   outline: none;
-  width: 150px;
-  
+  color: white;
+  font-size: 16px;
+  height: 28px; 
+  line-height: 28px;
+  padding: 0; 
+  margin: 0;
 }
+
 .search-bar input::placeholder {
   color: white;
-  opacity: 1; 
+  opacity: 1;
+  font-size: 14px;
+  line-height: 28px;
 }
 
 

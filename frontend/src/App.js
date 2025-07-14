@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import Chatbot from './Components/Chatbot';
 import Login from './Pages/login';
 import Register from './Pages/Register';
+
 import Dashboard from './Pages/Dashboard';
 import UserProfile from './Pages/UserProfile';
 import ResumeBuilder from './Pages/ResumeBuilder';
@@ -28,12 +29,14 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/resume" element={<ResumeBuilder />} />
+        
         <Route path="/form" element={<EducationForm />} />
         <Route path="/form2" element={<EducationForm2 />} />
         <Route path="/form3" element={<EducationForm3 />} />
          <Route path="/form4" element={<EducationForm4 />} />
     
         <Route path="/progress-bar" element={< ProgressForm />} />
+       
       </Routes>
     </>
   );

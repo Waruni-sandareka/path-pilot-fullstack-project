@@ -1,6 +1,6 @@
 // Sidebar.jsx
 import React from 'react';
-import { FaHome, FaBook, FaRobot, FaHeart, FaUser } from 'react-icons/fa';
+import { FaHome, FaBook, FaRobot, FaHeart, FaUser, FaChartBar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/Dashboard.css"; // Adjust path if needed
 
@@ -34,6 +34,10 @@ function Sidebar() {
           <li className="menu-item" onClick={() => navigate("/resume")}>
             <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
             <span>Resume Builder</span>
+          </li><br></br>
+          <li className="menu-item" onClick={() => navigate("/careertrends")}>
+            <FaChartBar className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
+            <span>Trends</span>
           </li>
         </ul>
       </nav>
