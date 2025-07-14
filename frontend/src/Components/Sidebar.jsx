@@ -14,23 +14,23 @@ function Sidebar() {
           <li className="menu-item" onClick={() => navigate("/")}>
             <FaHome className="icon" />
             <span>Home</span>
-          </li>
+          </li><br />
           <li className="menu-item">
             <FaBook className="icon" />
             <span>Academic Records</span>
-          </li>
+          </li><br />
           <li className="menu-item" onClick={() => navigate("/chatbot")}>
             <FaRobot className="icon" />
             <span>ChatBot</span>
-          </li>
+          </li><br />
           <li className="menu-item">
             <FaHeart className="icon" />
             <span>Help</span>
-          </li>
+          </li><br />
           <li className="menu-item" onClick={() => navigate("/userprofile")}>
             <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
             <span>Profile</span>
-          </li>
+          </li><br />
           <li className="menu-item" onClick={() => navigate("/resume")}>
             <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
             <span>Resume Builder</span>

@@ -1,0 +1,107 @@
+
+.education-form-layout {
+  display: flex;
+}
+
+
+
+
+.career-container {
+  background-color: #d1a7bd;
+  border-radius: 20px;
+  border: 1px solid #000;
+  max-width: 800px; /* increase if needed */
+  margin: 40px auto;
+  padding: 30px;
+  font-family: sans-serif;
+}
+
+h1 {
+  color: #fff;
+  font-size: 35px;
+  margin-bottom: 10px;
+ 
+}
+
+hr {
+  border: 2px solid #eaeaea;
+  border-radius: 2px;
+  margin: 10px 0 20px;
+}
+
+.subtitle {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.note {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+  text-align: left;
+  font-size: 17px;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* two columns */
+  gap: 22px 70px; /* vertical and horizontal spacing */
+  margin-bottom: 27px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: black;
+  white-space: nowrap; /* prevent line break */
+  gap: 10px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.other-skill-input {
+  width: 730px; /* or any size you prefer */
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #fdfdeb;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+  gap: 490px !important;
+}
+
+.back-btn {
+  padding: 12px 30px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.next-btn {
+  padding: 12px 40px;
+  background-color: #9f59d1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
