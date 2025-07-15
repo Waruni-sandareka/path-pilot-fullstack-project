@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import '../../Styles/EducationForm3.css';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar';
+import '../../Styles/EducationForm3.css';
 
 const skillsList = [
   "Time Management",
@@ -18,36 +18,44 @@ const skillsList = [
 ];
 
 const EducationForm3 = () => {
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [otherSkill, setOtherSkill] = useState("");
+  const { state } = useLocation();
+  const [formData, setFormData] = useState(state?.formData || {
+    educationLevel: '',
+    fieldOfStudy: '',
+    yearOfStudy: '',
+    technicalSkills: [],
+    otherTechnicalSkill: '',
+    softSkills: [],
+    otherSoftSkill: '',
+    areasOfInterest: '',
+    exploration: '',
+    careerGoals: ''
+  });
+  const [otherSoftSkill, setOtherSoftSkill] = useState(formData.otherSoftSkill || '');
   const navigate = useNavigate();
 
   const handleSkillChange = (e) => {
     const value = e.target.value;
-    setSelectedSkills((prev) =>
-      prev.includes(value)
-        ? prev.filter((skill) => skill !== value)
-        : [...prev, value]
-    );
+    setFormData((prev) => ({
+      ...prev,
+      softSkills: prev.softSkills.includes(value)
+        ? prev.softSkills.filter((skill) => skill !== value)
+        : [...prev.softSkills, value]
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const allSkills = [...selectedSkills];
-    if (otherSkill.trim()) {
-      allSkills.push(otherSkill.trim());
+    if (!formData.softSkills.length && !otherSoftSkill) {
+      alert('Please select at least one soft skill or enter an other skill.');
+      return;
     }
-
-    // Log or store the submitted soft skills
-    console.log("Submitted soft skills:", allSkills);
-
-    // ✅ Navigate to Form4
-    navigate('/form4');
+    const updatedFormData = { ...formData, otherSoftSkill };
+    navigate('/form4', { state: { formData: updatedFormData } });
   };
 
   const totalSteps = 4;
-  const currentStep = 3; // Since this is Form3
+  const currentStep = 3;
   const progressPercent = (currentStep / totalSteps) * 100;
 
   return (
@@ -55,22 +63,12 @@ const EducationForm3 = () => {
       <Sidebar />
       <div className="career-container">
         <h1>Career Assessment</h1>
-
-        {/* ✅ Progress bar */}
         <div className="progress-bar-container">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
+          <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
-
         <form onSubmit={handleSubmit}>
-          <p className="subtitle">
-            Which soft skills do you consider your greatest strengths?
-          </p>
-          <p className="note">
-            Select all that apply (choose at least one)
-          </p>
+          <p className="subtitle">Which soft skills do you consider your greatest strengths?</p>
+          <p className="note">Select all that apply (choose at least one)</p>
           <br />
           <div className="checkbox-grid">
             {skillsList.map((skill, index) => (
@@ -78,33 +76,25 @@ const EducationForm3 = () => {
                 <input
                   type="checkbox"
                   value={skill}
-                  checked={selectedSkills.includes(skill)}
+                  checked={formData.softSkills.includes(skill)}
                   onChange={handleSkillChange}
                 />
                 {skill}
               </label>
             ))}
           </div>
-
           <input
             type="text"
             className="other-skill-input"
             placeholder="Enter other soft skills"
-            value={otherSkill}
-            onChange={(e) => setOtherSkill(e.target.value)}
+            value={otherSoftSkill}
+            onChange={(e) => setOtherSoftSkill(e.target.value)}
           />
-
           <div className="button-group">
-            <button
-              type="button"
-              className="back-btn"
-              onClick={() => navigate('/form2')}
-            >
+            <button type="button" className="back-btn" onClick={() => navigate('/form2')}>
               ⏴ Previous
             </button>
-            <button type="submit" className="next-btn">
-              Next ⏵
-            </button>
+            <button type="submit" className="next-btn">Next ⏵</button>
           </div>
         </form>
       </div>
