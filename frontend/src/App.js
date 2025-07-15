@@ -14,6 +14,7 @@ import EducationForm from './Pages/Forms/EducationForm';
 import EducationForm2 from './Pages/Forms/EducationForm2';
 import EducationForm3 from './Pages/Forms/EducationForm3';
 import EducationForm4 from './Pages/Forms/EducationForm4';
+import Services from './Pages/Services';
 
 import ProgressForm from './Components/ProgressBar';
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/form3" element={<EducationForm3 />} />
          <Route path="/form4" element={<EducationForm4 />} />
          <Route path="/trends" element={<Trends />} />
+         <Route path="/services" element={<Services />} />
         <Route path="/progress-bar" element={< ProgressForm />} />
        
       </Routes>
