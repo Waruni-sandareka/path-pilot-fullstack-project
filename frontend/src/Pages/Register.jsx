@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../Styles/Register.css";
 import loginImage from "../assets/img/dashimage.png";
 
@@ -8,6 +8,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,10 +23,13 @@ function Register() {
 
       const data = await response.json();
       if (response.ok) {
-        setMessage(data.message || 'Registration successful!');
-        localStorage.setItem('token', data.token); // Store token if needed
+        setMessage('Registration successful! Logging in...');
+        localStorage.setItem('token', data.token); // Store DRF token
+        console.log('Token stored:', data.token);
+        setTimeout(() => navigate('/login'), 2000); // Redirect to login or home
       } else {
         setMessage(data.message || 'Registration failed.');
+        console.error('Registration failed:', data);
       }
     } catch (error) {
       setMessage('An error occurred. Please try again.');
