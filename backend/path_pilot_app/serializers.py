@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 import logging
+from .models import CareerAssessment
 
 User = get_user_model()
 
@@ -34,3 +35,22 @@ class LoginSerializer(serializers.Serializer):
             logger.warning(f"🔒 Authentication failed for email: {data.get('email')}")
             raise serializers.ValidationError('Invalid email or password')
         return {'user': user}
+
+
+class CareerAssessmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CareerAssessment
+        fields = [
+            'education_level', 'field_of_study', 'year_of_study',
+            'technical_skills', 'other_technical_skill',
+            'soft_skills', 'other_soft_skill',
+            'areas_of_interest', 'exploration', 'career_goals'
+        ]
+        extra_kwargs = {
+            'other_technical_skill': {'required': False, 'allow_blank': True},
+            'other_soft_skill': {'required': False, 'allow_blank': True}
+        }
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return CareerAssessment.objects.create(user=user, **validated_data)
