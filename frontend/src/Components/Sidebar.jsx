@@ -28,17 +28,18 @@ function Sidebar() {
             <span>Help</span>
           </li><br />
           <li className="menu-item" onClick={() => navigate("/userprofile")}>
-            <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
+            <FaUser className="icon" /> 
             <span>Profile</span>
           </li><br />
           <li className="menu-item" onClick={() => navigate("/resume")}>
-            <FaUser className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
+            <FaUser className="icon" /> 
             <span>Resume Builder</span>
           </li><br></br>
-          <li className="menu-item" onClick={() => navigate("/careertrends")}>
-            <FaChartBar className="icon" /> {/* Add FaUser from react-icons/fa if needed */}
+          <li className="menu-item" onClick={() => navigate("/trends")}>
+            <FaChartBar className="icon" /> 
             <span>Trends</span>
           </li>
+
         </ul>
       </nav>
     </aside>
