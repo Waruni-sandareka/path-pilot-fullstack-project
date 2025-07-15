@@ -8,7 +8,10 @@ from rest_framework.permissions import AllowAny
 from django.template.loader import render_to_string
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from weasyprint import HTML
+from rest_framework import status
 from django.http import HttpResponse, JsonResponse
+from .models import CareerAssessment
+from .serializers import CareerAssessmentSerializer
 import json
 import logging
 
@@ -141,3 +144,25 @@ def generate_resume(request):
         logger.error(f"❌ Error in generate_resume: {str(e)}")
         logger.error(f"❌ Request headers: {dict(request.headers)}")
         return Response({'error': str(e)}, status=500)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def career_assessment_create(request):
+    logger.info("🔧 Career assessment create view triggered")
+    logger.debug(f"Request headers: {dict(request.headers)}")
+    logger.debug(f"Request data: {request.data}")
+    try:
+        user = request.user
+        logger.info(f"🔐 Saving assessment for user: {user.username}")
+        serializer = CareerAssessmentSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            logger.info(f"✅ Career assessment saved for user: {user.username}")
+            return Response({'message': 'Career assessment submitted successfully'}, status=status.HTTP_201_CREATED)
+        logger.error(f"❌ Validation error: {serializer.errors}")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        logger.error(f"❌ Error in career_assessment_create: {str(e)}")
+        logger.error(f"❌ Request headers: {dict(request.headers)}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
