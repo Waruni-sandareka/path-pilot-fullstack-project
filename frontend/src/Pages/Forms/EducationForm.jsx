@@ -7,7 +7,14 @@ const EducationForm = () => {
   const [formData, setFormData] = useState({
     educationLevel: '',
     fieldOfStudy: '',
-    yearOfStudy: ''
+    yearOfStudy: '',
+    technicalSkills: [],
+    otherTechnicalSkill: '',
+    softSkills: [],
+    otherSoftSkill: '',
+    areasOfInterest: '',
+    exploration: '',
+    careerGoals: ''
   });
 
   const navigate = useNavigate();
@@ -18,11 +25,13 @@ const EducationForm = () => {
 
   const handleNext = (e) => {
     e.preventDefault();
-    console.log(formData);
-    navigate('/form2'); // Navigate to next step
+    if (!formData.educationLevel || !formData.fieldOfStudy || !formData.yearOfStudy) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    navigate('/form2', { state: { formData } });
   };
 
-  // Progress bar step — since this is page 1 of, say, 3
   const totalSteps = 4;
   const currentStep = 1;
   const progressPercent = (currentStep / totalSteps) * 100;
@@ -30,20 +39,12 @@ const EducationForm = () => {
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
-
       <div className="form-container" style={{ marginLeft: '120px', flex: 1 }}>
         <h1>Career Assessment</h1>
-
-        {/* ✅ Progress bar */}
         <div className="progress-bar-container">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${progressPercent}%` }}
-          ></div>
+          <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
-
         <p className="sub-heading">Tell us about your education</p>
-
         <form onSubmit={handleNext}>
           <label htmlFor="educationLevel">Current Education Level</label>
           <select
@@ -52,10 +53,9 @@ const EducationForm = () => {
             value={formData.educationLevel}
             onChange={handleChange}
             className="custom-select"
+            required
           >
-            <option value="" disabled hidden>
-              Select your education level
-            </option>
+            <option value="" disabled hidden>Select your education level</option>
             <option value="High School">High School</option>
             <option value="Diploma">Diploma</option>
             <option value="Undergraduate">Undergraduate</option>
@@ -68,8 +68,10 @@ const EducationForm = () => {
             id="fieldOfStudy"
             name="fieldOfStudy"
             placeholder="Enter your major"
+            value={formData.fieldOfStudy}
             onChange={handleChange}
             className="custom-select"
+            required
           />
 
           <label htmlFor="yearOfStudy">Year of Study</label>
@@ -79,10 +81,9 @@ const EducationForm = () => {
             value={formData.yearOfStudy}
             onChange={handleChange}
             className="custom-select"
+            required
           >
-            <option value="" disabled hidden>
-              Select year
-            </option>
+            <option value="" disabled hidden>Select year</option>
             <option value="1st Year">1st Year</option>
             <option value="2nd Year">2nd Year</option>
             <option value="3rd Year">3rd Year</option>
@@ -93,7 +94,7 @@ const EducationForm = () => {
             <button type="button" className="back-btn" onClick={() => navigate('/')}>
               ⏴ Back to Home
             </button>
-            <button type="submit" className="next-btn" >Next ⏵</button>
+            <button type="submit" className="next-btn">Next ⏵</button>
           </div>
         </form>
       </div>
