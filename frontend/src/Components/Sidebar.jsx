@@ -38,7 +38,11 @@ function Sidebar() {
           <li className="menu-item" onClick={() => navigate("/trends")}>
             <FaChartBar className="icon" /> 
             <span>Trends</span>
-          </li>
+          </li><br></br>
+          <li className="menu-item" onClick={() => navigate("/cvupload")}>
+            <FaChartBar className="icon" /> 
+            <span>Career predictor</span>
+          </li><br></br>
 
         </ul>
       </nav>
