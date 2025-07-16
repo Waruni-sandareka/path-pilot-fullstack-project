@@ -1,13 +1,13 @@
 import React from 'react';
+import contactImg from '../assets/img/contact2.png';
 import '../Styles/Contact.css';
-import contactImg from '../assets/img/contact.png'; // Updated image path
 
 const ContactUs = () => {
   return (
     <div className="contact-container">
       <div className="contact-content">
         <div className="contact-info">
-          <img src={contactImg} alt="Contact Illustration" className="contact-image" />
+          <img src={contactImg} alt="Contact" className="contact-image" />
           <h2>Contact Us</h2>
           <p>We’d love to hear from you! Reach out for inquiries, feedback, or collaborations.</p>
           <div className="info-block">

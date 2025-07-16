@@ -263,16 +263,18 @@ const Home = () => {
       <h1 className="Contacttitle">
         Contact <span className="Us">Us</span>
       </h1>
-      <div id="contact" className="contact-container">
-        <div className="contact-form">
-          <input type="text" className="contact-input" placeholder="Your Name" />
-          <input type="email" className="contact-input" placeholder="Your Email" />
-          <input type="tel" className="contact-input" placeholder="Your Number" />
-          <textarea className="contact-textarea" placeholder="Your Message"></textarea>
-          <button className="contact-btn">Submit</button>
-        </div>
-        <div className="contact-image-container">
-          <img src={contactIllustration} alt="Contact Us" className="contact-image" />
+      <div id="contact" className="home-contact-section">
+        <div className="form-wrapper">
+          <form className="home-contact-form">
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <input type="text" placeholder="Your Number" />
+            <textarea placeholder="Your Message" rows="4" />
+            <button type="submit">Submit</button>
+          </form>
+          <div className="home-contact-image-wrapper">
+            <img src={contactIllustration} alt="Contact" className="home-contact-image" />
+          </div>
         </div>
       </div>
     </div>
