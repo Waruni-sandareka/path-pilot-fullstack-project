@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .utils.model_loader import generate_answer
+from .utils.model_loader import model_loader
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -12,8 +12,11 @@ from rest_framework import status
 from django.http import HttpResponse, JsonResponse
 from .models import CareerAssessment
 from .serializers import CareerAssessmentSerializer
+import pdfplumber
+from django.core.files.storage import FileSystemStorage
 import json
 import logging
+import os
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -50,14 +53,20 @@ def chatbot_response(request):
                 return JsonResponse({"error": "Message is required"}, status=400)
             
             logger.info(f"🧠 Received message from user: {user_message}")
-            reply_text = generate_answer(user_message)
-            logger.info(f"🤖 Model reply: {reply_text}")
-            print(f"🤖 Model reply: {reply_text}")
-            return JsonResponse({'reply': reply_text})
+            reply_text = model_loader.generate_chatbot_answer(user_message)
+            if reply_text:
+                logger.info(f"🤖 Model reply: {reply_text}")
+                print(f"🤖 Model reply: {reply_text}")
+                return JsonResponse({'reply': reply_text}, status=200)
+            else:
+                logger.error("❌ Failed to generate chatbot response")
+                return JsonResponse({'error': 'Failed to generate chatbot response'}, status=500)
+        
         except Exception as e:
             logger.error(f"❌ Error in chatbot_response: {e}")
-            return JsonResponse({'error': 'Something went wrong'}, status=500)
-    logger.warning("⚠️ Only POST requests are allowed")
+            return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
+    
+    logger.warning("⚠️ Only POST requests are allowed Dele requests are allowed")
     print("⚠️ Only POST requests are allowed")
     return JsonResponse({'error': 'Only POST requests allowed'}, status=405)
 
@@ -166,3 +175,64 @@ def career_assessment_create(request):
         logger.error(f"❌ Error in career_assessment_create: {str(e)}")
         logger.error(f"❌ Request headers: {dict(request.headers)}")
         return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@csrf_exempt
+def predict_job_role(request):
+    logger.info("🔧 predict_job_role view triggered")
+    if request.method == 'POST':
+        try:
+            # Check if a file is uploaded
+            if 'cv' not in request.FILES:
+                logger.warning("⚠️ No CV file uploaded")
+                return JsonResponse({"error": "No CV file uploaded"}, status=400)
+            
+            cv_file = request.FILES['cv']
+            # Validate file type
+            if not cv_file.name.endswith('.pdf'):
+                logger.warning("⚠️ Only PDF files are supported")
+                return JsonResponse({"error": "Only PDF files are supported"}, status=400)
+            
+            # Save the uploaded file temporarily
+            fs = FileSystemStorage(location='/tmp')
+            filename = fs.save(cv_file.name, cv_file)
+            file_path = os.path.join('/tmp', filename)
+            
+            logger.info(f"📄 Processing CV file: {filename}")
+            # Extract text from PDF
+            with pdfplumber.open(file_path) as pdf:
+                text = ""
+                for page in pdf.pages:
+                    page_text = page.extract_text()
+                    if page_text:
+                        text += page_text + "\n"
+                if not text.strip():
+                    logger.warning("⚠️ No text extracted from PDF")
+                    return JsonResponse({"error": "No text extracted from PDF"}, status=400)
+            
+            # Predict job role
+            logger.info("🧠 Predicting job role from CV text")
+            predicted_role = model_loader.predict_job_role(text)
+            if predicted_role:
+                response = {"predicted_role": predicted_role}
+                if predicted_role == "Quality Assurance":
+                    response["note"] = "Quality Assurance may correspond to Software Tester based on CV content."
+                logger.info(f"🤖 Predicted job role: {predicted_role}")
+                print(f"🤖 Predicted job role: {predicted_role}")
+                return JsonResponse(response, status=200)
+            else:
+                logger.error("❌ Failed to predict job role due to label decoding error")
+                return JsonResponse({"error": "Failed to predict job role due to label decoding error"}, status=500)
+        
+        except Exception as e:
+            logger.error(f"❌ Error in predict_job_role: {e}")
+            return JsonResponse({"error": f"Error processing CV: {str(e)}"}, status=500)
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                logger.info(f"🗑️ Cleaned up temporary file: {file_path}")
+    
+    logger.warning("⚠️ Only POST requests are allowed")
+    print("⚠️ Only POST requests are allowed")
+    return JsonResponse({"error": "Only POST requests allowed"}, status=405)
