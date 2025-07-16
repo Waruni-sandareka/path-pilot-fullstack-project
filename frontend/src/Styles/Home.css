@@ -269,18 +269,74 @@ body {
   box-sizing: border-box;
 }
 
-/* Contact Section */
-.contact-container {
+.home-contact-section {
+  background-color: #fef2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
   font-family: 'Segoe UI', sans-serif;
 }
 
-.contact-form input,
-.contact-form textarea {
-  font-family: 'Segoe UI', sans-serif;
-  font-size: 16px;
+.form-wrapper {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  width: 100%;
 }
 
-/* Popup background with blur */
+.home-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  width: 100%;
+}
+
+.home-contact-form input,
+.home-contact-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #a58fd8;
+  border-radius: 20px;
+  background-color: #fff8f8;
+  font-size: 1rem;
+}
+
+.home-contact-form textarea {
+  resize: vertical;
+}
+
+.home-contact-form button {
+  background-color: #9448F2;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 150px;
+}
+
+.home-contact-form button:hover {
+  background-color: #5a3475;
+}
+
+.home-contact-image-wrapper {
+  max-width: 550px;
+  width: 100%;
+}
+
+.home-contact-image {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: contain;
+}
+
 .popup-overlay {
   position: fixed;
   top: 0;
