@@ -51,6 +51,16 @@ class CareerAssessmentSerializer(serializers.ModelSerializer):
             'other_soft_skill': {'required': False, 'allow_blank': True}
         }
 
+    def validate_technical_skills(self, value):
+        if value == ',' or not value.strip():
+            return ''
+        return value.strip(',')
+
+    def validate_soft_skills(self, value):
+        if value == ',' or not value.strip():
+            return ''
+        return value.strip(',')
+
     def create(self, validated_data):
         user = self.context['request'].user
         return CareerAssessment.objects.create(user=user, **validated_data)

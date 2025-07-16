@@ -32,6 +32,7 @@ const EducationForm3 = () => {
     careerGoals: ''
   });
   const [otherSoftSkill, setOtherSoftSkill] = useState(formData.otherSoftSkill || '');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSkillChange = (e) => {
@@ -46,11 +47,16 @@ const EducationForm3 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.softSkills.length && !otherSoftSkill) {
-      alert('Please select at least one soft skill or enter an other skill.');
+    if (!formData.softSkills.length && !otherSoftSkill.trim()) {
+      setError('Please select at least one soft skill or enter an other skill.');
       return;
     }
-    const updatedFormData = { ...formData, otherSoftSkill };
+    const updatedFormData = {
+      ...formData,
+      otherSoftSkill: otherSoftSkill.trim(),
+      softSkills: formData.softSkills.filter(skill => skill !== 'Others')
+    };
+    console.log('Form3 submitted:', updatedFormData); // Debug
     navigate('/form4', { state: { formData: updatedFormData } });
   };
 
@@ -90,6 +96,7 @@ const EducationForm3 = () => {
             value={otherSoftSkill}
             onChange={(e) => setOtherSoftSkill(e.target.value)}
           />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className="button-group">
             <button type="button" className="back-btn" onClick={() => navigate('/form2')}>
               ⏴ Previous

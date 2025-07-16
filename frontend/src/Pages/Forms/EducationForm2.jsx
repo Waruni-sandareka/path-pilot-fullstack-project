@@ -32,6 +32,7 @@ const EducationForm2 = () => {
     careerGoals: ''
   });
   const [otherTechnicalSkill, setOtherTechnicalSkill] = useState(formData.otherTechnicalSkill || '');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSkillChange = (e) => {
@@ -46,11 +47,16 @@ const EducationForm2 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.technicalSkills.length && !otherTechnicalSkill) {
-      alert('Please select at least one technical skill or enter an other skill.');
+    if (!formData.technicalSkills.length && !otherTechnicalSkill.trim()) {
+      setError('Please select at least one technical skill or enter an other skill.');
       return;
     }
-    const updatedFormData = { ...formData, otherTechnicalSkill };
+    const updatedFormData = {
+      ...formData,
+      otherTechnicalSkill: otherTechnicalSkill.trim(),
+      technicalSkills: formData.technicalSkills.filter(skill => skill !== 'Others')
+    };
+    console.log('Form2 submitted:', updatedFormData); // Debug
     navigate('/form3', { state: { formData: updatedFormData } });
   };
 
@@ -90,6 +96,7 @@ const EducationForm2 = () => {
             value={otherTechnicalSkill}
             onChange={(e) => setOtherTechnicalSkill(e.target.value)}
           />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className="button-group">
             <button type="button" className="back-btn" onClick={() => navigate('/form')}>
               ⏴ Previous

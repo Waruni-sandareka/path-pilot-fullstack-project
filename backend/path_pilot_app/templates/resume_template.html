@@ -21,16 +21,67 @@
             border-bottom: 2px solid #000;
             padding-bottom: 5px;
         }
+        .section p {
+            margin: 5px 0;
+        }
+        .skills-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills-list li {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>{{ user.username }}</h1>
+    <h1>{{ user.username }}'s Career Assessment</h1>
     <div class="contact-info">
         <p>Email: {{ user.email }}</p>
     </div>
     <div class="section">
-        <h2>Summary</h2>
-        <p>Professional individual seeking opportunities to leverage skills and experience.</p>
+        <h2>Education</h2>
+        <p><strong>Education Level:</strong> {{ assessment.education_level }}</p>
+        <p><strong>Field of Study:</strong> {{ assessment.field_of_study }}</p>
+        <p><strong>Year of Study:</strong> {{ assessment.year_of_study }}</p>
+    </div>
+    <div class="section">
+        <h2>Skills</h2>
+        <p><strong>Technical Skills:</strong></p>
+        <ul class="skills-list">
+            {% if assessment.technical_skills and assessment.technical_skills != "," %}
+                {% for skill in assessment.technical_skills.split(",") %}
+                    {% if skill|length > 0 %}
+                        <li>{{ skill }}</li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <li>No technical skills provided</li>
+            {% endif %}
+            {% if assessment.other_technical_skill %}
+                <li>{{ assessment.other_technical_skill }}</li>
+            {% endif %}
+        </ul>
+        <p><strong>Soft Skills:</strong></p>
+        <ul class="skills-list">
+            {% if assessment.soft_skills and assessment.soft_skills != "," %}
+                {% for skill in assessment.soft_skills.split(",") %}
+                    {% if skill|length > 0 %}
+                        <li>{{ skill }}</li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <li>No soft skills provided</li>
+            {% endif %}
+            {% if assessment.other_soft_skill %}
+                <li>{{ assessment.other_soft_skill }}</li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="section">
+        <h2>Goals and Interests</h2>
+        <p><strong>Areas of Interest:</strong> {{ assessment.areas_of_interest }}</p>
+        <p><strong>Exploration:</strong> {{ assessment.exploration }}</p>
+        <p><strong>Career Goals:</strong> {{ assessment.career_goals }}</p>
     </div>
 </body>
 </html>

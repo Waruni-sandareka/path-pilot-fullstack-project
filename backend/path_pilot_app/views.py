@@ -166,3 +166,28 @@ def career_assessment_create(request):
         logger.error(f"❌ Error in career_assessment_create: {str(e)}")
         logger.error(f"❌ Request headers: {dict(request.headers)}")
         return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def career_assessment_details(request):
+    logger.info("🔧 Career assessment details view triggered")
+    try:
+        user = request.user
+        logger.info(f"🔐 Retrieving assessment for user: {user.username}")
+        assessment = CareerAssessment.objects.filter(user=user).order_by('-created_at').first()
+        if not assessment:
+            logger.warning(f"❌ No career assessment found for user: {user.username}")
+            return Response({'error': 'No career assessment found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        logger.debug(f"Assessment data: {assessment.__dict__}")
+        html_string = render_to_string('resume_template.html', {
+            'user': user,
+            'assessment': assessment
+        })
+        logger.info(f"✅ Rendered career assessment for user: {user.username}")
+        return HttpResponse(html_string, content_type='text/html')
+    except Exception as e:
+        logger.error(f"❌ Error in career_assessment_details: {str(e)}")
+        logger.error(f"❌ Request headers: {dict(request.headers)}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
