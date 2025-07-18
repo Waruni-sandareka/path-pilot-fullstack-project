@@ -33,7 +33,8 @@
 .menu-item .icon {
   margin-right: 10px;
   font-size: 18px;
-  color: rgb(5, 5, 5);
+  color: rgb(113, 79, 155);
+  width: 20px;
 }
 
 .menu-item:hover {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/ResumeBuilder.css';
+import Sidebar from '../Components/Sidebar'; 
 
 const ResumeBuilder = () => {
   const navigate = useNavigate();
@@ -84,6 +85,8 @@ const ResumeBuilder = () => {
   if (error) return <div>{error}</div>;
 
   return (
+    <div className="dashboard-container" style={{ display: 'flex' }}>
+      <Sidebar/>
     <div className="resume-builder-container">
       <h2>Resume Builder</h2>
       <div className="user-details">
@@ -93,6 +96,7 @@ const ResumeBuilder = () => {
       <button className="build-resume-btn" onClick={handleBuildResume}>
         Build Resume
       </button>
+    </div>
     </div>
   );
 };
