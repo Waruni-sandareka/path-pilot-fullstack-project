@@ -1,16 +1,20 @@
-.contact-container {
-  background-color: #fef2f2;
+.contact-page {
+  display: flex;
+  background-color: #f3e8f0;
   min-height: 100vh;
+}
+.contact-container {
+  flex: 1;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 .contact-content {
   display: flex;
-  background-color: #f3e8ff;
+  background-color: #f3e8f0;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   padding: 2rem;

@@ -1,13 +1,25 @@
 .navbar {
+  position: fixed;             /* Freeze the navbar */
+  top: 0;                      /* Stick to the top */
+  left: 0;
+  right: 0;
+  z-index: 1000;               /* Stay above other content */
+  background-color: #f3e8f0;   /* Reapply background */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 32px;
   font-weight: 400;
   font-size: 1.2rem;
-  background-color: #fae9f2;
   font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
+
+.page-content {
+  padding-top: 100px; /* Match your navbar's height */
+}
+
+
 
 .navbar-left {
   display: flex;

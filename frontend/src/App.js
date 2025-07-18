@@ -24,6 +24,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <div className="page-content">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/chatbot" element={<Chatbot />} />
@@ -44,8 +45,9 @@ function App() {
         <Route path="/progress-bar" element={< ProgressForm />} />
         <Route path="/cvupload" element = {<CVUpload/>}/>
        
-      </Routes>
+      </Routes></div>
     </>
+    
   );
 }
 
