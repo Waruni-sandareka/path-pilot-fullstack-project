@@ -52,8 +52,15 @@
 .navbar-links {
   display: flex;
   gap: 35px;
-  margin-left: 100px;
+  margin-left: 100px; 
+  text-decoration: none;
+
+  
 }
+.navbar-links a:hover,
+.navbar-links a:focus,
+.navbar-links a:active {
+  text-decoration: none; }
 
 .navbar-links a {
   text-decoration: none;
@@ -64,6 +71,7 @@
 
 .navbar-links a:hover {
   color: #9b42e5;
+  font-style: none;
 }
 
 .navbar-right {

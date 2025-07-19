@@ -1,7 +1,14 @@
+
+.trends-layout {
+  display: flex;
+}
+
+
 /* Layout */
 .dashboard-container {
     display: flex;
-    min-height: 100vh;
+    min-height: 255vh;
+    margin-left: 15px;
   }
   
   .main-content {
@@ -34,6 +41,17 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     animation: pulseGlow 2s infinite;
   }
+  .trends-container {
+  flex: 1;
+  padding: 40px;
+  background-color: #f9f6fb;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  color: #4a148c;
+
+  /* 💡 This adds left space equal to your sidebar width */
+  margin-left: 10px; /* Adjust if your Sidebar has different width */
+}
   
   .header-title {
     font-size: 3rem;

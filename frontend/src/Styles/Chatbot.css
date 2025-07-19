@@ -3,6 +3,7 @@
   height: 80vh;
   background: #fef2f2;
   overflow: hidden;
+  margin-left: 20px;
 }
 
 .chat-box {

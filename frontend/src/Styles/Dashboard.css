@@ -2,14 +2,22 @@
   display: flex;
   height: 100vh;
   background-color: #f3e8f0;
+  margin-left: 255px;
+  padding-top: 0px; /* Set this to match your actual navbar height */
+  box-sizing: border-box;
 }
 
 /* Sidebar */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
   width: 250px;
   background-color: #f1f1f1;
   padding: 20px;
-  
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 /* Sidebar Menu */
