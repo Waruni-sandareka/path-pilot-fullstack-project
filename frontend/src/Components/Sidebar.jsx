@@ -1,8 +1,7 @@
-// Sidebar.jsx
 import React from 'react';
-import { FaHome, FaBook, FaRobot, FaHeart, FaUser, FaChartBar } from 'react-icons/fa';
+import { FaHome, FaBook, FaRobot, FaHeart, FaUser, FaChartBar, FaFileAlt, FaChartLine } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import "../Styles/Dashboard.css"; // Adjust path if needed
+import "../Styles/Dashboard.css";
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -32,18 +31,17 @@ function Sidebar() {
             <span>Profile</span>
           </li><br />
           <li className="menu-item" onClick={() => navigate("/resume")}>
-            <FaUser className="icon" /> 
+            <FaFileAlt className="icon" /> 
             <span>Resume Builder</span>
-          </li><br></br>
+          </li><br />
           <li className="menu-item" onClick={() => navigate("/trends")}>
             <FaChartBar className="icon" /> 
             <span>Trends</span>
-          </li><br></br>
+          </li><br />
           <li className="menu-item" onClick={() => navigate("/cvupload")}>
-            <FaChartBar className="icon" /> 
+            <FaChartLine className="icon" /> 
             <span>Career predictor</span>
-          </li><br></br>
-
+          </li><br />
         </ul>
       </nav>
     </aside>
