@@ -8,7 +8,8 @@
   font-family: 'Arial', sans-serif;
   color: #fff;
   box-sizing: border-box; 
-  height: 550px;  
+  height: 550px; 
+  margin-left: 390px !important; 
 }
 
 /* Add consistent width for all input and select fields */
