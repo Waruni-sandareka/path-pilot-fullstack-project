@@ -255,7 +255,8 @@ const CVUpload = () => {
           </div>
 
           {/* Features Section */}
-          <div className="features-grid">
+          <div className="features-section">
+                <div className="features-grid">
             {[
               {
                 icon: Target,
@@ -281,6 +282,7 @@ const CVUpload = () => {
                 <p className="feature-description">{feature.description}</p>
               </div>
             ))}
+          </div>
           </div>
         </div>
       </div>

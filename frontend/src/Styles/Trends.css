@@ -1,5 +1,31 @@
+/* Container holding sidebar and content */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-wrap: nowrap;
+}
+
+/* Sidebar styling */
+.sidebar {
+  width: 250px; /* Adjust sidebar width */
+  flex-shrink: 0;
+  background-color: #f3e8f0; /* Example sidebar background */
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px; /* Optional padding */
+}
+
+/* Main content container - push right by sidebar width */
 .trends-container {
+  margin-left: 250px; /* Must match sidebar width */
+  flex-grow: 1;
   padding: 40px;
+  box-sizing: border-box;
   background-color: #f9f6fb;
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
@@ -37,7 +63,7 @@
   color: #9c27b0;
 }
 
-/* ✅ Text and Table Row - FIXED */
+/* Text and Table Row */
 .text-table-row {
   display: flex;
   gap: 40px;
@@ -115,6 +141,15 @@
   color: #7e57c2;
   user-select: text;
 }
+.table-container > h3 {
+  font-size: 25px;      
+  font-weight: 600;    
+  color: #7b1fa2;      
+  margin-bottom: 24px;  
+  text-align: center;   
+  font-family: 'Segoe UI';
+  letter-spacing: 0.05em;
+}
 
 /* Table Container */
 .table-container {
@@ -134,7 +169,7 @@
   border-collapse: collapse;
   background: transparent;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 18px;
   color: #5d3a85;
   table-layout: fixed;
   border: 1px solid #f3e8f0;
@@ -147,11 +182,12 @@
   border: 1px solid #f3e8f0;
   vertical-align: top;
   word-break: break-word;
+  font-size: 14px; 
 }
 
 .analytics-table th {
   background-color: #deabe7;
-  color: f3e8f0;
+  color: #f3e8f0;
   font-weight: 700;
   letter-spacing: 0.05em;
   border-color: #c5c1c7;
@@ -187,5 +223,18 @@
   .analytics-info,
   .table-container {
     min-width: 100%;
+  }
+
+  /* For mobile, remove sidebar fixed position and margin */
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .trends-container {
+    margin-left: 0;
+    padding: 20px;
   }
 }
