@@ -52,7 +52,6 @@ function Dashboard() {
           maxWidth: '1030px',
           margin: 'auto',
           height: '600px',
-          marginTop: '10px',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: '24px' }}>

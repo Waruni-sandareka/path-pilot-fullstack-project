@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/Services.css';
-import Sidebar from '../Components/Sidebar';
 
 import casserol1 from '../assets/img/casserol1.jpeg';
 import casserol2 from '../assets/img/casserol2.jpg';
@@ -42,8 +41,6 @@ const Services = () => {
   }, []);
 
   return (
-     <div className="dashboard-container">
-      <Sidebar />
     <div className="services-page">
       {/* Carousel */}
       <div className="carousel">
@@ -112,7 +109,6 @@ const Services = () => {
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

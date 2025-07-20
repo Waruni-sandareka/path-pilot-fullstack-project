@@ -1,23 +1,16 @@
-body, html, #root {
-  padding-left: 90px; /* or the exact width of your sidebar */
-  box-sizing: border-box;
-  margin: 0;
-  height: 100%;
-}
-
 .form-container {
   background-color: #D0ADC4;
   padding: 40px;
   border-radius: 20px;
-  max-width: 800px;
-  width: 100%;
+  max-width: 800px;       
+  width: 100%;              
   margin: 40px auto;
-  margin-left: 250px; /* ✅ Fix overlap with sidebar */
   font-family: 'Arial', sans-serif;
   color: #fff;
-  box-sizing: border-box;
-  height: 550px;
+  box-sizing: border-box; 
+  height: 550px;  
 }
+
 /* Add consistent width for all input and select fields */
 .form-container input,
 .form-container select {
