@@ -1,4 +1,5 @@
 import React from 'react';
+import Sidebar from '../Components/Sidebar'; 
 import {
   FaChartLine,
   FaRobot,
@@ -66,6 +67,8 @@ const descriptions = [
 
 function Trends() {
   return (
+    <div className="trends-layout">
+      <Sidebar />
     <div className="trends-container">
       <h1>
         <FaChartLine style={{ marginRight: '10px' }} />
@@ -188,6 +191,7 @@ function Trends() {
           </table>
         </div>
       </div>
+    </div>
     </div>
   );
 }
