@@ -53,7 +53,7 @@ const EducationForm = () => {
             value={formData.educationLevel}
             onChange={handleChange}
             className="custom-select"
-       
+            required
           >
             <option value="" disabled hidden>Select your education level</option>
             <option value="High School">High School</option>
@@ -71,7 +71,7 @@ const EducationForm = () => {
             value={formData.fieldOfStudy}
             onChange={handleChange}
             className="custom-select"
-           
+            required
           />
 
           <label htmlFor="yearOfStudy">Year of Study</label>
@@ -81,7 +81,7 @@ const EducationForm = () => {
             value={formData.yearOfStudy}
             onChange={handleChange}
             className="custom-select"
-          
+            required
           >
             <option value="" disabled hidden>Select year</option>
             <option value="1st Year">1st Year</option>
