@@ -15,7 +15,6 @@
   height: calc(100vh - 100px);
   width: 250px;
   background-color: #f1f1f1;
-  padding: 20px;
   overflow-y: auto;
   z-index: 1000;
 }
@@ -45,9 +44,9 @@
 }
 
 .menu-item:hover {
-  background: #e8e7e7;
+  background: #efc2fb;
   border-radius: 5px;
-  color: #9e7ba9;
+  color: #250430;
 }
 
 /* Main Content */
