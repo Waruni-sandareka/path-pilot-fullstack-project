@@ -19,6 +19,7 @@ import ProgressForm from './Components/ProgressBar';
 import ContactUs from './Pages/ContactUs';
 import About from './Pages/About';
 import CVUpload from './Pages/JobRolePredictor';
+import AcademicRecords from './Pages/AcademicRecords';
 import HelpPage from './Pages/Help';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
          <Route path="/about" element={<About/>}/>
         <Route path="/progress-bar" element={< ProgressForm />} />
         <Route path="/cvupload" element = {<CVUpload/>}/>
+        <Route path="/academicrecords" element = {<AcademicRecords/>}/>
         <Route path="/help" element = {<HelpPage/>}/>
        
       </Routes></div>
