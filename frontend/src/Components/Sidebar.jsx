@@ -22,10 +22,6 @@ function Sidebar() {
             <FaRobot className="icon" />
             <span>ChatBot</span>
           </li><br />
-          <li className="menu-item">
-            <FaHeart className="icon" />
-            <span>Help</span>
-          </li><br />
           <li className="menu-item" onClick={() => navigate("/userprofile")}>
             <FaUser className="icon" /> 
             <span>Profile</span>
@@ -41,6 +37,10 @@ function Sidebar() {
           <li className="menu-item" onClick={() => navigate("/cvupload")}>
             <FaChartLine className="icon" /> 
             <span>Career predictor</span>
+          </li><br />
+          <li className="menu-item"onClick={() => navigate("/help")}>
+            <FaHeart className="icon" />
+            <span>Help</span>
           </li><br />
         </ul>
       </nav>

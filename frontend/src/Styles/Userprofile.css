@@ -1,8 +1,6 @@
 /* Container */
 .user-profile-wrapper {
   flex-grow: 1;
-  height: 100vh;
-  background: linear-gradient(135deg, #ece9f1 0%, #f7f1ff 100%);
   padding: 64px 80px;
   display: flex;
   justify-content: center;
