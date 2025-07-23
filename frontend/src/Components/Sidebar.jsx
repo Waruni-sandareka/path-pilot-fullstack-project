@@ -14,7 +14,7 @@ function Sidebar() {
             <FaHome className="icon" />
             <span>Home</span>
           </li><br />
-          <li className="menu-item">
+          <li className="menu-item" onClick={() => navigate("/academicrecords")}>
             <FaBook className="icon" />
             <span>Academic Records</span>
           </li><br />
