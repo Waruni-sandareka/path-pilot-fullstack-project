@@ -81,10 +81,10 @@ const CVUpload = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-containerJobRole">
       <Sidebar />
-      <div className="main-content">
-        <div className="container">
+      <div className="main-contentJobRole">
+        <div className="containerJobRole">
           {/* Header Section */}
           <div className="header-section">
             <div className="header-icon">
