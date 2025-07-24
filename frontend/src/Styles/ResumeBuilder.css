@@ -17,7 +17,7 @@
 }
 
 /* Hero Section */
-.hero-section {
+.hero-sectionResume {
   position: relative;
   overflow: hidden;
 }
@@ -64,7 +64,7 @@
 
 .hero-description {
   font-size: 1.10rem;
-  color: #6b7280;
+  color: #917ba4;
   line-height: 1.75;
   margin-top: 16px;
   margin-bottom: 20px;

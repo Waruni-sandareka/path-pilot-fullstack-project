@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileText, Zap, Shield, Award, Palette, Clock } from 'lucide-react';
+import { FileText, Zap, Shield, Award } from 'lucide-react';
 import Sidebar from '../Components/Sidebar';
 import UserCard from '../Components/UserCard';
 import DownloadButton from '../Components/DownloadButton';
@@ -28,16 +28,6 @@ const features = [
     icon: Award,
     title: "ATS Optimized",
     description: "Our resumes are optimized to pass through Applicant Tracking Systems"
-  },
-  {
-    icon: Palette,
-    title: "Customizable Design",
-    description: "Personalize colors, fonts, and layouts to match your style"
-  },
-  {
-    icon: Clock,
-    title: "Quick Export",
-    description: "Download your resume as PDF instantly, ready for applications"
   }
 ];
 
@@ -145,7 +135,7 @@ const ResumeBuilder = () => {
       <Sidebar />
       <div className="resume-builder-container">
         {/* Hero Section */}
-        <div className="hero-section">
+        <div className="hero-sectionResume">
           <div className="hero-gradient" />
           <div className="container">
             <div className="hero-grid">

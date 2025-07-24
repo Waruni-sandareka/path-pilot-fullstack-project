@@ -1,21 +1,22 @@
 /* Layout */
-.dashboard-container {
+.dashboard-containerJobRole {
   display: flex;
   min-height: 100vh;
 }
 
-.main-content {
+.main-contentJobRole {
   flex: 1;
-  background: linear-gradient(135deg, #f9fafb, #e5e7eb, #ede9fe);
+  background: linear-gradient(135deg, #ffffff, #eddcfe, #fbecff);
   padding: 3rem;
-  max-width: 1400px;
+  max-width: 1900px;
   margin: 0 auto;
 }
 
-.container {
+.containerJobRole {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  margin-left: 350px;
 }
 
 .features-section {
