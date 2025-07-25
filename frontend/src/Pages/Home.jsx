@@ -42,17 +42,19 @@ const Home = () => {
       )}
 
       {/* Navbar */}
-      <div className="w-full top-0 left-0 z-10 fixed shadow-sm bg-white"></div><br></br>
+      <Navbar />
+
+
 
       {/* Content Section */}
-      <div className="text-section mt-24">
+     <div className="text-section relative z-10 mt-0">
+<div style={{ position: "relative", width: "100%" }}>
         <div className="oval-shape"></div>
 
         <div className="welcome-circle-container">
+          
           <h2 className="welcome-text">
-            <br />
-            <br />
-            <p></p>
+            
             Welcome!
           </h2>
 
@@ -66,6 +68,8 @@ const Home = () => {
             <div className="circle"><img src={circle5} alt="Career 5" /></div>
           </div>
         </div>
+        </div>
+
 
         <h1 className="career-text text-5xl pt-4 mb-5 leading-relaxed font-bold">
           Career guidance, all <br /> in one place.
