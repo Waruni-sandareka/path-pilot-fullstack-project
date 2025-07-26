@@ -80,7 +80,7 @@ function Dashboard() {
   Get Started!
 </button>
         </div>
-      </div>
+      </div><br></br><br></br>
     </div>
   );
 }
