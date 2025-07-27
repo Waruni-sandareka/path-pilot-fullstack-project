@@ -1,121 +1,501 @@
-.services-page {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f3e8f0;
-  padding: 20px;
-  color: #333;
+/* Services Page Styles */
+.services-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Carousel Styling Fix */
-.carousel {
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 120px 20px 80px;
+  text-align: center;
   position: relative;
-  width: 100%;
-  max-width: 1500px;
-  margin: 0 auto 40px auto;
-  height: 400px;
-  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to right, #ede7f6, #f3e5f5);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>') no-repeat bottom;
+  background-size: cover;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #ffffff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  font-weight: 300;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Carousel Section */
+.carousel-section {
+  background: white;
+  padding: 80px 20px;
+  position: relative;
+}
+
+.carousel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carousel-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.carousel-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.carousel-header p {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-content {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-slide {
-  flex: 0 0 100%;
-  position: relative;
-  height: 100%;
-  overflow: hidden;
-}
-
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Makes all images fill equally */
-  filter: brightness(50%);
-}
-.carousel-slides-container {
-  display: flex;
-  height: 100%;
-  width: 100%; /* for 3 slides */
-  transition: transform 0.7s ease-in-out;
-}
-
-
-
-/* Pop-up text on image */
-.carousel-caption {
-  position: absolute;
-  bottom: 30px;
-  left: 40px;
-  color: #fff;
-  animation: slideUp 0.8s ease-in-out forwards;
-  opacity: 0;
-  animation-delay: 0.3s;
-}
-
-.carousel-caption h2 {
-  font-size: 32px;
-  margin: 0;
-  font-weight: bold;
-}
-
-.carousel-caption p {
-  font-size: 18px;
-  margin-top: 10px;
-  color: #eee;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.services-container {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr;
+  min-width: 100%;
+  padding: 40px;
 }
 
 .service-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  color: white;
+  min-height: 500px;
   display: flex;
-  background: #fff;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5"/><circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="0.3"/></svg>') repeat;
+}
+
+.gradient-1 {
+  background: linear-gradient(135deg, #424f8a 0%, #2a0350 100%);
+}
+
+.gradient-2 {
+  background: linear-gradient(135deg, #67316d 0%, #35040b 100%);
+}
+
+.gradient-3 {
+  background: linear-gradient(135deg, #5780a3 0%, #103e41 100%);
+}
+
+.gradient-4 {
+  background: linear-gradient(135deg, #bb5ec7 0%, #621077 100%);
+}
+
+.service-header {
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.service-header h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.service-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.service-description {
+  font-size: 1rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  color: #ffffff;
+}
+
+.service-features {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  color: white;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+/* Carousel Navigation */
+.carousel-nav {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #374151;
+}
+
+.carousel-nav:hover {
+  background: #f8fafc;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #667eea;
+  transform: scale(1.2);
+}
+
+
+/* Services Grid Section */
+.services-grid-section {
+  background: #f8fafc;
+  padding: 80px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  font-size: 1.2rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 2 cards per row */
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;  /* Stack on smaller screens */
+  }
+}
+
+.service-grid-card {
+  background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.service-card:hover {
+.service-grid-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.service-card img {
-  width: 40%;
-  height: 300px;
-  object-fit: cover;
+.card-header {
+  color: white;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.service-content {
-  padding: 20px;
-  flex: 1;
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5"/></svg>') repeat;
+}
+
+.card-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.card-header p {
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+  color: rgb(218, 216, 216);
+}
+
+.card-content {
+  padding: 30px;
+}
+
+.card-description {
+  color: #64748b;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.feature-list {
+  space-y: 15px;
+}
+
+.feature-item-grid {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-item-grid:hover {
+  background: #e2e8f0;
+  transform: translateX(3px);
+}
+
+.feature-icon-grid {
+  color: #667eea;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.feature-item-grid span {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* Benefits Section */
+.benefits-section {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  padding: 80px 20px;
+}
+
+.benefits-content h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 60px;
   
 }
 
-.service-content h3 {
-  color: #7B1FA2;
-  font-size: 22px;
-  margin-bottom: 10px;
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
 }
 
-.service-content p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #555;
-  text-align: justify;
+.benefit-card {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
 
+.benefit-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+.benefit-icon {
+  color: #60a5fa;
+  margin: 0 auto 20px;
+  padding: 20px;
+  background: rgba(96, 165, 250, 0.1);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.benefit-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.benefit-card p {
+  opacity: 0.8;
+  line-height: 1.6;
+  color: #dee8f5;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .carousel-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .carousel-nav {
+    display: none;
+  }
+  
+  .carousel-slide {
+    padding: 20px;
+  }
+  
+  .service-card {
+    padding: 30px 20px;
+    min-height: auto;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-header h2,
+  .carousel-header h2,
+  .benefits-content h2 {
+    font-size: 2rem;
+  }
 }
