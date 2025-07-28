@@ -417,6 +417,7 @@
     background: rgba(255, 255, 255, 0.9);
     color: #8b5a8b;
     border: 2px solid rgba(139, 90, 139, 0.3);
+    padding-right: 8rem;
   }
   
   .btn-outline:hover {
@@ -505,8 +506,10 @@
   .save-section .btn {
     position: relative;
     z-index: 2;
-    font-size: 1.1rem;
-    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    padding: 1rem 0rem;
+    padding-right: 3.5rem;
+    text-align: center;
     background: linear-gradient(135deg, #ffffff, #f7f4f9);
     color: #8b5a8b;
     border: 2px solid rgba(255, 255, 255, 0.3);
