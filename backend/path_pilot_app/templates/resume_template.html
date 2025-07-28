@@ -1,36 +1,324 @@
+{% load resume_filters %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Resume</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background-color: #f4f4f9;
+            color: #333;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .resume-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .contact-info {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .contact-info p {
+            margin: 5px 0;
         }
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         .section h2 {
-            border-bottom: 2px solid #000;
-            padding-bottom: 5px;
+            font-size: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .section-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .section-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .section-content ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .section-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 18px;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .item-details {
+            color: #555;
+            font-size: 13px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .education-item, .experience-item, .project-item, .certificate-item, .course-item, .participation-item {
+            margin-bottom: 15px;
+        }
+        .no-data {
+            color: #777;
+            font-style: italic;
+        }
+        @media print {
+            body {
+                background: none;
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+            .resume-container {
+                padding: 20px;
+                box-shadow: none;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>{{ user.username }}</h1>
-    <div class="contact-info">
-        <p>Email: {{ user.email }}</p>
-    </div>
-    <div class="section">
-        <h2>Summary</h2>
-        <p>Professional individual seeking opportunities to leverage skills and experience.</p>
+    <div class="resume-container">
+        <h1>{{ user.username }}</h1>
+        <div class="contact-info">
+            <p>Email: {{ user.email }}</p>
+            {% if user.profile.phone %}
+                <p>Phone: {{ user.profile.phone }}</p>
+            {% endif %}
+            {% if user.profile.address %}
+                <p>Address: {{ user.profile.address }}</p>
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <h2>Summary</h2>
+            <div class="section-content">
+                {% if career_assessment.career_goals %}
+                    <p>{{ career_assessment.career_goals|truncatewords:50 }}</p>
+                {% else %}
+                    <p class="no-data">Professional individual seeking opportunities to leverage skills and experience.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="section-content">
+                {% if academic_record.student_type == 'undergraduate' %}
+                    <div class="education-item">
+                        <div class="item-title">Undergraduate Student</div>
+                        <div class="item-details">
+                            {% if academic_record.gpa %}
+                                <p>GPA: {{ academic_record.gpa }}</p>
+                            {% endif %}
+                            {% if career_assessment.field_of_study %}
+                                <p>Field of Study: {{ career_assessment.field_of_study }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="education-item">
+                        <div class="item-title">School Student</div>
+                    </div>
+                {% endif %}
+
+                {% if academic_record.a_levels %}
+                    <div class="education-item">
+                        <div class="item-title">A-Level Results</div>
+                        <ul>
+                            {% for a_level in academic_record.a_levels %}
+                                <li>{{ a_level.subject }}: {{ a_level.grade }}</li>
+                            {% empty %}
+                                <li class="no-data">No A-Level results provided</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {% if academic_record.o_levels %}
+                    <div class="education-item">
+                        <div class="item-title">O-Level Results</div>
+                        <ul>
+                            {% for o_level in academic_record.o_levels %}
+                                <li>{{ o_level.subject }}: {{ o_level.grade }}</li>
+                            {% empty %}
+                                <li class="no-data">No O-Level results provided</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="section-content skills-grid">
+                {% if career_assessment.technical_skills %}
+                    <div>
+                        <div class="item-title">Technical Skills</div>
+                        <ul>
+                            {% for skill in career_assessment.technical_skills|split:"," %}
+                                <li>{{ skill|trim }}</li>
+                            {% endfor %}
+                            {% if career_assessment.other_technical_skill %}
+                                <li>{{ career_assessment.other_technical_skill|trim }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if career_assessment.soft_skills %}
+                    <div>
+                        <div class="item-title">Soft Skills</div>
+                        <ul>
+                            {% for skill in career_assessment.soft_skills|split:"," %}
+                                <li>{{ skill|trim }}</li>
+                            {% endfor %}
+                            {% if career_assessment.other_soft_skill %}
+                                <li>{{ career_assessment.other_soft_skill|trim }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if not career_assessment.technical_skills and not career_assessment.soft_skills %}
+                    <p class="no-data">No skills provided</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            <div class="section-content">
+                {% for project in academic_record.projects %}
+                    <div class="project-item">
+                        <div class="item-title">{{ project.title }}</div>
+                        <div class="item-details">
+                            <p>Duration: {{ project.duration }}</p>
+                            <p>{{ project.description|truncatewords:30 }}</p>
+                            <p>Technologies: {{ project.technologies|join:", " }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No projects provided</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="section-content">
+                {% for experience in academic_record.experiences %}
+                    <div class="experience-item">
+                        <div class="item-title">{{ experience.position }} at {{ experience.company }}</div>
+                        <div class="item-details">
+                            <p>Duration: {{ experience.duration }}</p>
+                            <p>{{ experience.description|truncatewords:30 }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No experience provided</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Certificates</h2>
+            <div class="section-content">
+                {% for certificate in academic_record.certificates %}
+                    <div class="certificate-item">
+                        <div class="item-title">{{ certificate.name }}</div>
+                        <div class="item-details">
+                            <p>Issuer: {{ certificate.issuer }}</p>
+                            <p>Date: {{ certificate.date }}</p>
+                            {% if certificate.credentialId %}
+                                <p>Credential ID: {{ certificate.credentialId }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No certificates provided</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Courses</h2>
+            <div class="section-content">
+                {% for course in academic_record.courses %}
+                    <div class="course-item">
+                        <div class="item-title">{{ course.name }}</div>
+                        <div class="item-details">
+                            <p>Provider: {{ course.provider }}</p>
+                            <p>Duration: {{ course.duration }}</p>
+                            <p>Completion Date: {{ course.completionDate }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No courses provided</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Hackathons & Competitions</h2>
+            <div class="section-content">
+                {% for participation in academic_record.participations %}
+                    <div class="participation-item">
+                        <div class="item-title">{{ participation.event }}</div>
+                        <div class="item-details">
+                            <p>Type: {{ participation.type|title }}</p>
+                            <p>Achievement: {{ participation.achievement }}</p>
+                            <p>Date: {{ participation.date }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="no-data">No participations provided</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Career Interests</h2>
+            <div class="section-content">
+                {% if career_assessment.areas_of_interest %}
+                    <p>Areas of Interest: {{ career_assessment.areas_of_interest|truncatewords:50 }}</p>
+                {% endif %}
+                {% if career_assessment.exploration %}
+                    <p>Career Exploration: {{ career_assessment.exploration|truncatewords:50 }}</p>
+                {% endif %}
+                {% if not career_assessment.areas_of_interest and not career_assessment.exploration %}
+                    <p class="no-data">No career interests provided</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -12,6 +12,8 @@ from rest_framework import status
 from django.http import HttpResponse, JsonResponse
 from .models import CareerAssessment
 from .serializers import CareerAssessmentSerializer
+from .models import AcademicRecord
+from .serializers import AcademicRecordSerializer
 import pdfplumber
 from django.core.files.storage import FileSystemStorage
 import json
@@ -140,8 +142,42 @@ def generate_resume(request):
         user = request.user
         logger.info(f"🔐 Generating resume for user: {user.username}")
 
+        # Fetch academic record
+        try:
+            academic_record = AcademicRecord.objects.get(user=user)
+            academic_data = AcademicRecordSerializer(academic_record).data
+        except AcademicRecord.DoesNotExist:
+            academic_data = {
+                'student_type': '',
+                'gpa': None,
+                'a_levels': [],
+                'o_levels': [],
+                'projects': [],
+                'experiences': [],
+                'certificates': [],
+                'courses': [],
+                'participations': []
+            }
+
+        # Fetch career assessment
+        try:
+            career_assessment = CareerAssessment.objects.get(user=user)
+            career_data = CareerAssessmentSerializer(career_assessment).data
+        except CareerAssessment.DoesNotExist:
+            career_data = {
+                'technical_skills': '',
+                'other_technical_skill': '',
+                'soft_skills': '',
+                'other_soft_skill': '',
+                'areas_of_interest': '',
+                'exploration': '',
+                'career_goals': ''
+            }
+
         html_string = render_to_string('resume_template.html', {
             'user': user,
+            'academic_record': academic_data,
+            'career_assessment': career_data
         })
 
         response = HttpResponse(content_type='application/pdf')
@@ -236,3 +272,71 @@ def predict_job_role(request):
     logger.warning("⚠️ Only POST requests are allowed")
     print("⚠️ Only POST requests are allowed")
     return JsonResponse({"error": "Only POST requests allowed"}, status=405)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def academic_record_create(request):
+    logger.info("🔧 Academic record create view triggered")
+    logger.debug(f"Request headers: {dict(request.headers)}")
+    logger.debug(f"Request data: {request.data}")
+    try:
+        user = request.user
+        logger.info(f"🔐 Saving academic record for user: {user.username}")
+        serializer = AcademicRecordSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            logger.info(f"✅ Academic record saved for user: {user.username}")
+            return Response({
+                'message': 'Academic record submitted successfully'
+            }, status=status.HTTP_201_CREATED)
+        logger.error(f"❌ Validation error: {serializer.errors}")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        logger.error(f"❌ Error in academic_record_create: {str(e)}")
+        logger.error(f"❌ Request headers: {dict(request.headers)}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def academic_record_get(request):
+    try:
+        user = request.user
+        try:
+            academic_record = AcademicRecord.objects.get(user=user)
+            serializer = AcademicRecordSerializer(academic_record)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except AcademicRecord.DoesNotExist:
+            return Response({
+                'message': 'No academic record found'
+            }, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        logger.error(f"❌ Error in academic_record_get: {str(e)}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def academic_record_update(request):
+    logger.info("🔧 Academic record update view triggered")
+    logger.debug(f"Request headers: {dict(request.headers)}")
+    logger.debug(f"Request data: {request.data}")
+    try:
+        user = request.user
+        try:
+            academic_record = AcademicRecord.objects.get(user=user)
+            serializer = AcademicRecordSerializer(academic_record, data=request.data, context={'request': request})
+            if serializer.is_valid():
+                serializer.save()
+                logger.info(f"✅ Academic record updated for user: {user.username}")
+                return Response({
+                    'message': 'Academic record updated successfully'
+                }, status=status.HTTP_200_OK)
+            logger.error(f"❌ Validation error: {serializer.errors}")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except AcademicRecord.DoesNotExist:
+            return Response({
+                'error': 'Academic record not found'
+            }, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        logger.error(f"❌ Error in academic_record_update: {str(e)}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

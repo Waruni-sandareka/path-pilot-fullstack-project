@@ -17,6 +17,54 @@ const AcademicRecords = () => {
   const [participations, setParticipations] = useState([]);
   const [activeTab, setActiveTab] = useState('basic');
   const [toast, setToast] = useState({ show: false, title: '', description: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasExistingRecord, setHasExistingRecord] = useState(false);
+
+  useEffect(() => {
+    const fetchAcademicRecord = async () => {
+      setIsLoading(true);
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:8000/api/academic-records/get/', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setStudentType(data.student_type || '');
+          setGpa(data.gpa || '');
+          setALevels(data.a_levels.length > 0 ? data.a_levels : [{ subject: '', grade: '' }]);
+          setOLevels(data.o_levels.length > 0 ? data.o_levels : [{ subject: '', grade: '' }]);
+          setProjects(data.projects || []);
+          setExperiences(data.experiences || []);
+          setCertificates(data.certificates || []);
+          setCourses(data.courses || []);
+          setParticipations(data.participations || []);
+          setHasExistingRecord(true);
+        }
+      } catch (error) {
+        showToast('Error', 'Failed to load academic records');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAcademicRecord();
+  }, []);
+
+  // Toast effect
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => {
+        setToast({ show: false, title: '', description: '' });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast.show]);
 
   const addALevel = () => {
     setALevels([...aLevels, { subject: '', grade: '' }]);
@@ -147,20 +195,61 @@ const AcademicRecords = () => {
     setToast({ show: true, title, description });
   };
 
-  useEffect(() => {
-    if (toast.show) {
-      const timer = setTimeout(() => {
-        setToast({ show: false, title: '', description: '' });
-      }, 3000);
-      return () => clearTimeout(timer);
+  const handleSave = async () => {
+    if (!studentType) {
+      showToast('Error', 'Please select a student type');
+      return;
     }
-  }, [toast.show]);
 
-  const handleSave = () => {
-    showToast(
-      "Academic Records Saved",
-      "Your academic information has been successfully saved."
-    );
+    setIsLoading(true);
+    const token = localStorage.getItem('token');
+    const payload = {
+      student_type: studentType,
+      gpa: studentType === 'undergraduate' && gpa ? parseFloat(gpa) : null,
+      a_levels: aLevels.filter(item => item.subject && item.grade),
+      o_levels: oLevels.filter(item => item.subject && item.grade),
+      projects: projects.map(project => ({
+        ...project,
+        technologies: project.technologies.filter(tech => tech.trim())
+      })),
+      experiences,
+      certificates,
+      courses,
+      participations
+    };
+
+    try {
+      const url = hasExistingRecord 
+        ? 'http://localhost:8000/api/academic-records/update/'
+        : 'http://localhost:8000/api/academic-records/';
+      const method = hasExistingRecord ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (response.ok) {
+        const message = hasExistingRecord 
+          ? 'Academic records updated successfully'
+          : 'Academic records saved successfully';
+        showToast('Success', message);
+        if (!hasExistingRecord) {
+          setHasExistingRecord(true);
+        }
+      } else {
+        const errorData = await response.json();
+        showToast('Error', errorData.error || 'Failed to save academic records');
+      }
+    } catch (error) {
+      showToast('Error', 'Network error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const grades = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'F'];
@@ -186,6 +275,12 @@ const AcademicRecords = () => {
             <div className="fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50 animate-fade-in">
               <h3 className="font-bold">{toast.title}</h3>
               <p>{toast.description}</p>
+            </div>
+          )}
+
+          {isLoading && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
             </div>
           )}
 
@@ -763,9 +858,13 @@ const AcademicRecords = () => {
 
           {studentType && (
             <div className="save-section">
-              <button onClick={handleSave} className="btn btn-primary">
+              <button 
+                onClick={handleSave} 
+                className="btn btn-primary"
+                disabled={isLoading}
+              >
                 <Award className="icon" />
-                Save Academic Records
+                {isLoading ? 'Saving...' : 'Save Academic Records'}
               </button>
             </div>
           )}
