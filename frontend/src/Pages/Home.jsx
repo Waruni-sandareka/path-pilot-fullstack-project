@@ -6,6 +6,7 @@ import img from "../assets/img/home2.png";
 import ourservicebot from "../assets/img/ourservicesbot.png";
 import skillimage from "../assets/img/skillimage.png";
 import dashimage from "../assets/img/dashimage.png";
+import predictor from "../assets/img/predictor.png"
 import contactIllustration from "../assets/img/contact.png";
 import circle1 from "../assets/img/circle1.jpg";
 import circle2 from "../assets/img/circle2.jpg";
@@ -22,12 +23,12 @@ const Home = () => {
   const handleReadMore = (content) => {
     setPopupContent(content);
     setShowPopup(true);
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("modal-open");   
   };
 
   const closePopup = () => {
     setShowPopup(false);
-    document.body.style.overflow = "auto";
+    document.body.classList.remove("modal-open");
   };
 
   return (
@@ -42,17 +43,19 @@ const Home = () => {
       )}
 
       {/* Navbar */}
-      <div className="w-full top-0 left-0 z-10 fixed shadow-sm bg-white"></div><br></br>
+      <Navbar />
+
+
 
       {/* Content Section */}
-      <div className="text-section mt-24">
+     <div className="text-section relative z-10 mt-0">
+<div style={{ position: "relative", width: "100%" }}>
         <div className="oval-shape"></div>
 
         <div className="welcome-circle-container">
+          
           <h2 className="welcome-text">
-            <br />
-            <br />
-            <p></p>
+            
             Welcome!
           </h2>
 
@@ -66,24 +69,24 @@ const Home = () => {
             <div className="circle"><img src={circle5} alt="Career 5" /></div>
           </div>
         </div>
+        </div>
+
 
         <h1 className="career-text text-5xl pt-4 mb-5 leading-relaxed font-bold">
           Career guidance, all <br /> in one place.
         </h1>
       </div>
 
-      {/* Image Section */}
+
       <div className="image-section">
         <img src={img} alt="Home Visual" className="big-image" />
       </div>
 
-      {/* Explore Button */}
-      <p></p>
       <Link to="/register">
         <button className="explore-button">Sign Up</button>
       </Link>
 
-      {/* Our Services Section */}
+
       <h1 className="Titleour">
         Our <span className="Titleservices">Services</span>
       </h1>
@@ -95,7 +98,7 @@ const Home = () => {
         </div>
         <div className="service-text">
           <h2 className="service-title">AI-Powered Career Counsellor</h2>
-          <p className="service-description">
+          <p className="career-description">
             AI-Powered Career Counselor – Access expert career advice and skill 
             development suggestions through our intuitive chatbot. Shape your future with personalized support.
           </p>
@@ -142,62 +145,60 @@ const Home = () => {
       {/* Dashboard Section */}
       <div className="dash-container">
         <div className="dash-text">
-          <h2 className="dash-title">Personalized Career Progress Dashboard</h2>
-          <p className="dash-description">
-            Track your career milestones, set goals, and monitor your skill development with 
-            a customized dashboard tailored to your professional growth. Stay on top of your 
-            progress and plan your next steps effectively.
-          </p>
-          <button
+          <h2 className="dash-title">Real-Time Career Trends</h2>
+<p className="dash-description">
+  Stay ahead of the curve with live updates on which careers are trending. 
+  Our platform uses AI-driven analytics to show what job roles are in demand, 
+  making it easier for students and professionals to align their skills with 
+  real-world opportunities.
+</p>
+
+<button
   className="read-more-btn"
   onClick={() =>
     handleReadMore(
       <div>
-        <h2>Personalized Career Progress Dashboard</h2>
+        <h2>Real-Time Career Trends</h2>
         <p>
-          The Personalized Career Progress Dashboard is a comprehensive tool designed to give Gen Z students a clear and actionable overview of their career development journey. It leverages AI analytics to adapt to individual learning styles, career goals, and pace.
+          The Real-Time Career Trends feature transforms raw search and market 
+          data into actionable insights, helping users understand which careers 
+          are gaining momentum and which ones are steady or declining.
         </p>
-        <h4>Key Features:</h4>
+
+        <h4>Key Insights Provided:</h4>
         <ul>
           <li>
-            <strong>Dynamic Skill Assessment:</strong> Continuously evaluates student skills through quizzes, project completions, and feedback to highlight strengths and areas for improvement.
+            <strong>📊 Top Career Search Volume:</strong> A bar chart ranking 
+            the most-searched careers like <em>AI Engineer</em>, 
+            <em>Data Scientist</em>, and <em>UX Designer</em>, providing a clear 
+            snapshot of interest levels.
           </li>
           <li>
-            <strong>Custom Goal Setting & Tracking:</strong> Students can define short-term and long-term career goals, such as mastering specific skills, completing certifications, or gaining internship experience, with real-time progress tracking.
+            <strong>🎯 Career Trend Distribution:</strong> A donut chart showing 
+            how user interest is distributed across different professions, 
+            helping students spot emerging fields.
           </li>
           <li>
-            <strong>Visual Progress Indicators:</strong> Interactive charts, progress bars, timelines, and badges provide visual motivation and easy monitoring of achievements.
+            <strong>📈 Career Analytics Summary:</strong> A quick-view panel with 
+            role descriptions, search stats, and icons for easy understanding.
           </li>
           <li>
-            <strong>AI-Driven Recommendations:</strong> Based on progress and gaps identified, the dashboard suggests personalized learning resources, networking events, mentorship opportunities, and job openings.
-          </li>
-          <li>
-            <strong>Integration with External Tools:</strong> Sync with popular calendar apps to manage deadlines and interviews, connect with resume builders, and link with job portals and internship platforms for seamless application management.
-          </li>
-          <li>
-            <strong>Collaborative Features:</strong> Enables sharing progress reports with mentors, career counsellors, or parents for feedback and support.
-          </li>
-          <li>
-            <strong>Notifications & Reminders:</strong> Timely alerts about upcoming deadlines, new course recommendations, or application statuses keep students organized and proactive.
+            <strong>📋 Summary Table:</strong> A structured list of trending 
+            careers, search volume, and descriptions, perfect for quick reference.
           </li>
         </ul>
-        <h4>Future Enhancements:</h4>
+
+        <h4>How It Helps Users:</h4>
         <ul>
-          <li>
-            Incorporation of gamification elements like leaderboards and challenges to boost engagement.
-          </li>
-          <li>
-            Enhanced AI that predicts future skill demands and suggests pivot strategies in response to changing job markets.
-          </li>
-          <li>
-            Personalized mental wellness check-ins to support student motivation and reduce burnout.
-          </li>
-          <li>
-            Mobile app integration for on-the-go progress tracking and notifications.
-          </li>
+          <li>🎓 Guides students toward in-demand skills and career paths.</li>
+          <li>📌 Supports educators and mentors with live market insights.</li>
+          <li>🚀 Enables job seekers to target growing industries for better opportunities.</li>
         </ul>
+
         <p>
-          Overall, the dashboard transforms career planning into a transparent, manageable, and motivating process, enabling students to confidently shape their futures with actionable insights and continuous support.
+          By combining graphs, charts, and AI analysis, this feature keeps career 
+          planning relevant and data-driven — empowering users to make informed 
+          decisions based on real-time trends.
         </p>
       </div>
     )
@@ -218,36 +219,63 @@ const Home = () => {
           <img src={skillimage} alt="Skill Development Platform" />
         </div>
         <div className="skill-text">
-          <h2 className="skill-title">Skill Development Platform</h2>
-          <p className="skill-description">
-            Our Skill Development Platform is designed to empower Gen Z students to build the right skills for their chosen career paths through personalized learning journeys. Using AI-driven insights, it identifies skill gaps and curates customized course recommendations, hands-on projects, and interactive tutorials to ensure meaningful progress.
-          </p>
-         <button
+          <h2 className="skill-title">Resume Builder</h2>
+<p className="resume-description">
+  Our Resume Builder automatically generates a professional resume using the data students have already entered through the student forum. It streamlines the process by organizing their academic background, skills, experiences, and achievements into a clean, ready-to-use format.
+</p>
+<button
   className="read-more-btn"
   onClick={() =>
     handleReadMore(
       <div>
-        <h2>Skill Development Platform</h2>
+        <h2>Resume Builder</h2>
         <p>
-          Our Skill Development Platform leverages AI to personalize learning experiences for Gen Z students,
-          ensuring they build career-relevant skills efficiently and confidently.
+          The Resume Builder simplifies the resume creation process by leveraging existing student data collected via the student forum. It compiles this information into a polished resume format, saving time and ensuring consistency.
         </p>
-        <h4>Features & Benefits:</h4>
+        <h4>Key Features:</h4>
         <ul>
-          <li><strong>AI-Powered Skill Gap Analysis:</strong> Identifies the skills students need to develop based on assessments and progress.</li>
-          <li><strong>Customized Course Recommendations:</strong> Suggests courses and tutorials tailored to individual goals and learning preferences.</li>
-          <li><strong>Hands-On Projects:</strong> Provides practical assignments that simulate real-world challenges for deeper learning.</li>
-          <li><strong>Interactive Tutorials:</strong> Engaging multimedia content that caters to different learning styles.</li>
-          <li><strong>Progress Tracking & Feedback:</strong> Visual dashboards and detailed feedback help students stay motivated and aware of their growth.</li>
-          <li><strong>Community & Mentorship:</strong> Enables collaboration and guidance from peers and professionals.</li>
+          <li><strong>Automatic Data Integration:</strong> Pulls information from student profiles and forum submissions to populate the resume.</li>
+          <li><strong>Organized Sections:</strong> Structures the resume into clear sections such as Education, Skills, Experience, and Projects.</li>
+          <li><strong>Professional Formatting:</strong> Applies a clean, modern design that is suitable for job applications and academic purposes.</li>
+          <li><strong>Easy Export:</strong> Allows students to download their resume in common formats like PDF for immediate use.</li>
         </ul>
-        <h4>Examples:</h4>
         <p>
-          For instance, a student interested in web development might be recommended courses on HTML, CSS, and JavaScript, along with coding challenges and projects such as building a personal portfolio website.
-          Meanwhile, a student aiming for data science could receive tailored resources on Python, statistics, and machine learning fundamentals.
+          By using data already entered by students, the Resume Builder ensures a fast, efficient, and accurate resume creation experience.
         </p>
+      </div>
+    )
+  }
+>
+  Read More
+</button>
+
+        </div>
+      </div>
+
+{/* Dashboard Section */}
+      <div className="dash-container">
+        <div className="dash-text">
+          <h2 className="dash-title">Career Predictor</h2>
+<p className="career-description">
+  Our Career Predictor analyzes a student's uploaded CV to provide an exact career match based on their skills, experience, and achievements. It helps students understand which career paths best align with their profile.
+</p>
+<button
+  className="read-more-btn"
+  onClick={() =>
+    handleReadMore(
+      <div>
+        <h2>Career Predictor</h2>
         <p>
-          This platform ensures every student’s learning path is unique, practical, and aligned with their career ambitions.
+          The Career Predictor uses AI to examine the CV students upload, scanning through their education, skills, work history, and accomplishments to identify the most suitable career matches. 
+        </p>
+        <h4>Key Features:</h4>
+        <ul>
+          <li><strong>CV Analysis:</strong> Reviews the uploaded resume to assess skills, qualifications, and experience levels.</li>
+          <li><strong>Exact Career Match:</strong> Suggests the most fitting career paths that align with the student’s profile.</li>
+          <li><strong>Instant Feedback:</strong> Delivers results immediately after the CV is uploaded.</li>
+        </ul>
+        <p>
+          By simply uploading their CV, students gain clarity on where their current qualifications can lead them, empowering smarter career decisions.
         </p>
       </div>
     )
@@ -257,7 +285,11 @@ const Home = () => {
 </button>
 
         </div>
+        <div className="predictor-image">
+          <img src={predictor} alt="Predictor" />
+        </div>
       </div>
+      
 
       {/* Contact Section */}
       <h1 className="Contacttitle">

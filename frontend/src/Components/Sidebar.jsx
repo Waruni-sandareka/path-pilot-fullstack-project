@@ -8,8 +8,8 @@ function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <nav>
-        <ul className="menu">
+  <nav className="sidebar-nav">
+    <ul className="menu">
           <li className="menu-item" onClick={() => navigate("/")}>
             <FaHome className="icon" />
             <span>Home</span>

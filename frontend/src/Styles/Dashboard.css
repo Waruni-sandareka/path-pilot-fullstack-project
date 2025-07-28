@@ -1,22 +1,20 @@
 .dashboard-container {
-  /* Remove flex since sidebar is fixed */
   background-color: #f3e8f0;
   min-height: 100vh;
-  padding-left: 250px; /* space for fixed sidebar */
-  padding-top: 100px;  /* space for fixed navbar (if any) */
+  padding-left: 250px;  
+  padding-top: 100px;   
   box-sizing: border-box;
 }
 
-/* Sidebar stays fixed */
 .sidebar {
   position: fixed;
-  top: 100px; /* height of navbar */
+  top: 300px; 
   left: 0;
   height: calc(100vh - 100px);
   width: 250px;
   background-color: #f1f1f1;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1000; 
 }
 
 /* Sidebar Menu */
@@ -62,6 +60,7 @@
   max-width: 1024px;
   margin: 24px auto;
   box-sizing: border-box;
+
   /* no need for flex-grow here */
 }
 
@@ -95,6 +94,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  
 }
 
 .content-box h2 {
@@ -127,3 +127,5 @@
 .content-box button:hover {
   background-color: #f3f3db;
 }
+.sidebar-nav {
+  padding-top: 115px;   }
