@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 import logging
 from .models import CareerAssessment
+from .models import AcademicRecord
 
 User = get_user_model()
 
@@ -54,3 +55,61 @@ class CareerAssessmentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
         return CareerAssessment.objects.create(user=user, **validated_data)
+    
+
+
+class AcademicRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AcademicRecord
+        fields = [
+            'student_type',
+            'gpa',
+            'a_levels',
+            'o_levels',
+            'projects',
+            'experiences',
+            'certificates',
+            'courses',
+            'participations'
+        ]
+        extra_kwargs = {
+            'gpa': {'required': False, 'allow_null': True},
+            'a_levels': {'required': False},
+            'o_levels': {'required': False},
+            'projects': {'required': False},
+            'experiences': {'required': False},
+            'certificates': {'required': False},
+            'courses': {'required': False},
+            'participations': {'required': False}
+        }
+
+    def validate_gpa(self, value):
+        if value is not None and (value < 0 or value > 4.0):
+            raise serializers.ValidationError("GPA must be between 0.0 and 4.0")
+        return value
+
+    def validate_a_levels(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("A-Levels must be a list")
+        for item in value:
+            if not all(key in item for key in ['subject', 'grade']):
+                raise serializers.ValidationError("Each A-Level must have subject and grade")
+        return value
+
+    def validate_o_levels(self, value):
+        if not isinstance(value, list):
+            raise serializers.ValidationError("O-Levels must be a list")
+        for item in value:
+            if not all(key in item for key in ['subject', 'grade']):
+                raise serializers.ValidationError("Each O-Level must have subject and grade")
+        return value
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return AcademicRecord.objects.create(user=user, **validated_data)
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance
