@@ -29,6 +29,11 @@ from .models import User
 from .serializers import UserSerializer
 from .serializers import LoginSerializer
 from rest_framework.renderers import BaseRenderer
+from huggingface_hub import InferenceClient
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -55,7 +60,25 @@ def chatbot_response(request):
                 return JsonResponse({"error": "Message is required"}, status=400)
             
             logger.info(f"🧠 Received message from user: {user_message}")
-            reply_text = model_loader.generate_chatbot_answer(user_message)
+            
+            # Initialize InferenceClient with token from .env
+            client = InferenceClient(
+                token=os.environ.get("HF_TOKEN"),
+            )
+            
+            # Make API call to get response
+            completion = client.chat.completions.create(
+                model="moonshotai/Kimi-K2-Instruct",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": user_message
+                    }
+                ],
+            )
+            
+            reply_text = completion.choices[0].message.content
+            
             if reply_text:
                 logger.info(f"🤖 Model reply: {reply_text}")
                 print(f"🤖 Model reply: {reply_text}")
@@ -68,7 +91,7 @@ def chatbot_response(request):
             logger.error(f"❌ Error in chatbot_response: {e}")
             return JsonResponse({'error': f'Something went wrong: {str(e)}'}, status=500)
     
-    logger.warning("⚠️ Only POST requests are allowed Dele requests are allowed")
+    logger.warning("⚠️ Only POST requests are allowed")
     print("⚠️ Only POST requests are allowed")
     return JsonResponse({'error': 'Only POST requests allowed'}, status=405)
 
