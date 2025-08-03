@@ -7,7 +7,7 @@
 }
 
 .sidebar {
-  position: fixed;   
+  position: fixed;
   top: 0;
   left: 0;
   width: 250px;
@@ -20,8 +20,8 @@
 }
 
 .chat-box {
-  margin-left: 250px; 
-  margin-top: 20px;  
+  margin-left: 250px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -29,18 +29,13 @@
   border-radius: 1rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   height: calc(100vh - 40px);
-
 }
-
 
 .chat-messages {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
   scroll-behavior: smooth;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .chat-message {
@@ -64,7 +59,7 @@
 
 .user-card {
   background: #6b21a8;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .message-content {
@@ -118,4 +113,23 @@
 
 .send-button:hover {
   background: #581c87;
+}
+
+/* Markdown-specific styles for bot responses */
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5b21b6;
+  margin: 0.5rem 0;
+}
+
+.bullet-list {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.bullet-item {
+  margin-bottom: 0.4rem;
+  color: #333;
+  line-height: 1.4;
 }
