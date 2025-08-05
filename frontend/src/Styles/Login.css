@@ -35,18 +35,17 @@
     margin-bottom: 10px; /* Reduce bottom margin */
   }
   
-  /* Style for the login form container */
-  .login-container {
-    width: 250px; /* Reduced width */
-    padding: 20px; /* Reduced padding */
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #D0ADC4;
-    height: 250px; /* Reduced height */
-    margin-top: 30px;
-    flex: 1; /* Let the form container also take available space */
-    width: 100%; 
-  }
+.login-container {
+  width: 320px !important;  /* fixed container width */
+  max-width: 90vw;
+  padding: 30px 20px !important;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #D0ADC4;
+  height: auto !important;
+  margin-top: 30px;
+  box-sizing: border-box;
+}
   .login-page .login-container {
     width: 400px !important; /* Force the width to 300px */
     height:400px !important; /* Force the height to 350px */
@@ -61,29 +60,25 @@
     margin: 0 auto 5px
   }
   
-  
-  /* Style for input groups */
-  .input-group {
-    margin-bottom: 15px;
-  }
-  
-  .input-group input,
-  .btn {
-    gap: 30px !important;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border-radius: 30px;
-    border: none;
-  }
-  
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 280px !important;      /* fixed width */
+  max-width: 100%;
+  padding: 8px 15px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border: none;
+  display: block;               /* block so margin works */
+  margin: 0 auto;               /* center horizontally */
+}
+
   /* Button style */
   .btn {
     width: 120px !important;
-    padding: 10px;
+    padding: 5px;
     background-color: #FFFFF1 !important; /* Light background */
     color: black !important; /* Black text */
     border: none;
@@ -93,7 +88,10 @@
     
   }
   
-  
+  .input-group input::placeholder {
+  opacity: 0.4; /* Adjust between 0 (invisible) to 1 (fully visible) */
+  color: #000;  /* Optional: keep the color black or change as needed */
+}
   /* Optional styles for links and form */
   p {
     text-align: center;
