@@ -12,6 +12,8 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [animatedText, setAnimatedText] = useState('');
+  const [animatedIndex, setAnimatedIndex] = useState(null);
   const chatMessagesRef = useRef(null);
   const lastMessageCountRef = useRef(messages.length);
 
@@ -34,6 +36,8 @@ const ChatBot = () => {
   useEffect(() => {
     if (messages.length > lastMessageCountRef.current) {
       scrollToBottom(true); // Force scroll for new messages
+      setAnimatedIndex(messages.length - 1); // Start animation for the new message
+      setAnimatedText('');
     }
     lastMessageCountRef.current = messages.length;
   }, [messages]);
@@ -77,6 +81,40 @@ const ChatBot = () => {
     }
   };
 
+  useEffect(() => {
+    let interval;
+    if (animatedIndex !== null && animatedIndex === messages.length - 1) {
+      const botReply = messages[animatedIndex].text;
+      const lines = botReply.split('\n').filter(line => line.trim());
+      let currentLine = 0;
+      let currentChar = 0;
+      setAnimatedText('');
+
+      interval = setInterval(() => {
+        if (currentLine < lines.length) {
+          if (currentChar <= lines[currentLine].length) {
+            setAnimatedText((prev) => {
+              const currentText = prev.split('\n');
+              currentText[currentLine] = lines[currentLine].slice(0, currentChar);
+              return currentText.join('\n');
+            });
+            currentChar++;
+          } else {
+            currentChar = 0;
+            currentLine++;
+            setAnimatedText((prev) => prev + '\n');
+          }
+        } else {
+          clearInterval(interval);
+          setAnimatedText(botReply); // Ensure full text is set after animation
+          setAnimatedIndex(null); // Reset animation index
+        }
+      }, 10); // Adjust speed here (50ms per character)
+    }
+
+    return () => clearInterval(interval); // Cleanup on unmount or index change
+  }, [animatedIndex, messages]);
+
   return (
     <div className="chat-container">
       <Sidebar />
@@ -95,7 +133,7 @@ const ChatBot = () => {
                         li: ({ node, ...props }) => <li className="bullet-item" {...props} />,
                       }}
                     >
-                      {msg.text}
+                      {index === animatedIndex ? animatedText || msg.text : msg.text}
                     </ReactMarkdown>
                   ) : (
                     msg.text
