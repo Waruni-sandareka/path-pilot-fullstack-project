@@ -12,4 +12,5 @@ urlpatterns = [
     path('academic-records/', views.academic_record_create, name='create_academic_record'),
     path('academic-records/get/', views.academic_record_get, name='get_academic_record'),
     path('academic-records/update/', views.academic_record_update, name='update_academic_record'),
+    path('logout/', views.logout_user, name='logout_user'),
 ]

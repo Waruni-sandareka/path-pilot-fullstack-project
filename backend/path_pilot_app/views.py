@@ -363,3 +363,17 @@ def academic_record_update(request):
     except Exception as e:
         logger.error(f"❌ Error in academic_record_update: {str(e)}")
         return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def logout_user(request):
+    logger.info("🔧 logout_user view triggered")
+    try:
+        # Delete the user's token to log them out
+        request.user.auth_token.delete()
+        logger.info(f"🔓 User {request.user.username} logged out successfully")
+        return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        logger.error(f"❌ Error in logout_user: {e}")
+        return Response({'error': 'Something went wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
