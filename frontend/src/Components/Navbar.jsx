@@ -4,6 +4,7 @@ import logo from '../assets/logo.png';
 import { FiSearch, FiMessageCircle } from 'react-icons/fi';
 import { FaUserCircle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -25,6 +26,25 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      // Make a POST request to the logout endpoint
+      await axios.post('http://localhost:8000/api/logout/', {}, {
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`
+        }
+      });
+      // Remove token from localStorage
+      localStorage.removeItem('token');
+      setDropdownOpen(false);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      alert('Failed to log out. Please try again.');
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -73,11 +93,7 @@ const Navbar = () => {
               </button>
               <button
                 className="dropdown-item"
-                onClick={() => {
-                  setDropdownOpen(false);
-                  // Add logout logic here later
-                  alert('Logged out (placeholder)');
-                }}
+                onClick={handleLogout}
               >
                 Log Out
               </button>
