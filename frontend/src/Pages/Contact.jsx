@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import '../Styles/Contact.css';
 
-
 const Contact = () => {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +22,55 @@ const Contact = () => {
     }));
   };
 
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupContent(null);
+    document.body.classList.remove("contactpg-modal-open");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Message sent! Thank you for contacting us. We'll get back to you soon.");
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setLoading(true);
+
+    const templateParams = {
+      full_name: formData.name,
+      user_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    emailjs.send(
+      'service_0sd0ccu',
+      'template_qxrjy8r',
+      templateParams,
+      '2vKpCTymdsuQdQRts'
+    )
+    .then(() => {
+      setLoading(false);
+      setPopupContent(
+        <div>
+          <h2>Success</h2>
+          <p>Message sent successfully! Thank you for contacting us.</p>
+          <button onClick={closePopup}>OK</button>
+        </div>
+      );
+      setShowPopup(true);
+      document.body.classList.add("contactpg-modal-open");
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    })
+    .catch((error) => {
+      setLoading(false);
+      setPopupContent(
+        <div>
+          <h2>Error</h2>
+          <p>Failed to send message. Please try again later.</p>
+          <button onClick={closePopup}>Close</button>
+        </div>
+      );
+      setShowPopup(true);
+      document.body.classList.add("contactpg-modal-open");
+      console.error('EmailJS error:', error);
+    });
   };
 
   const teamMembers = [
@@ -32,6 +81,15 @@ const Contact = () => {
 
   return (
     <div className="contactpg-container">
+      {showPopup && (
+  <div className="contactpg-popup-overlay" style={{ zIndex: 10000 }}>
+    <div className="contactpg-popup-box">
+      <button className="contactpg-popup-close-btn" onClick={closePopup}>×</button>
+      <div className="contactpg-popup-content-area">{popupContent}</div>
+    </div>
+  </div>
+)}
+
       <div className="contactpg-inner-container">
         
         {/* Hero Section */}
@@ -134,7 +192,7 @@ const Contact = () => {
               <div className="contactpg-form-header">
                 <h3>Send us a Message</h3>
               </div>
-              <form onSubmit={handleSubmit} className="contactpg-form">
+              <form ref={formRef} onSubmit={handleSubmit} className="contactpg-form">
                 <div className="contactpg-form-row">
                   <div className="contactpg-form-field">
                     <label htmlFor="name">Full Name</label>
@@ -187,12 +245,16 @@ const Contact = () => {
                   />
                 </div>
 
-                <button type="submit" className="contactpg-submit-btn">
-                  <svg className="contactpg-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
-                  </svg>
-                  Send Message
+                <button type="submit" className="contactpg-submit-btn" disabled={loading}>
+                  {loading ? "Sending..." : (
+                    <>
+                      <svg className="contactpg-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                      </svg>
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </div>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'; 
+import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 import Navbar from "../Components/Navbar";
 
 import img from "../assets/img/home2.png";
@@ -18,31 +19,98 @@ import "../Styles/Home.css";
 import "../Styles/ContactUs.css";
 
 const Home = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupContent, setPopupContent] = useState("");
+  const [servicePopupVisible, setServicePopupVisible] = useState(false);
+  const [servicePopupContent, setServicePopupContent] = useState(null);
 
-  const handleReadMore = (content) => {
-    setPopupContent(content);
-    setShowPopup(true);
+  const [contactPopupVisible, setContactPopupVisible] = useState(false);
+  const [contactPopupContent, setContactPopupContent] = useState(null);
+
+  const form = useRef();
+
+  // Open service description popup
+  const openServicePopup = (content) => {
+    setServicePopupContent(content);
+    setServicePopupVisible(true);
     document.body.classList.add("home-modal-open");
   };
 
-  const closePopup = () => {
-    setShowPopup(false);
+  // Close service description popup
+  const closeServicePopup = () => {
+    setServicePopupVisible(false);
+    setServicePopupContent(null);
     document.body.classList.remove("home-modal-open");
+  };
+
+  // Open contact success/error popup
+  const openContactPopup = (content) => {
+    setContactPopupContent(content);
+    setContactPopupVisible(true);
+    document.body.classList.add("home-modal-open");
+  };
+
+  // Close contact popup
+  const closeContactPopup = () => {
+    setContactPopupVisible(false);
+    setContactPopupContent(null);
+    document.body.classList.remove("home-modal-open");
+  };
+
+  // Email send handler
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_0sd0ccu',
+        'template_3cr2tkp',
+        form.current,
+        '2vKpCTymdsuQdQRts'
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          openContactPopup(
+            <div>
+              <h2>Success</h2>
+              <p>Message sent successfully! Thank you for contacting us.</p>
+              <button onClick={closeContactPopup} style={{ marginTop: '10px' }}>OK</button>
+            </div>
+          );
+          form.current.reset();
+        },
+        (error) => {
+          console.log(error.text);
+          openContactPopup(
+            <div>
+              <h2>Error</h2>
+              <p>Failed to send message. Please try again later.</p>
+              <button onClick={closeContactPopup} style={{ marginTop: '10px' }}>Close</button>
+            </div>
+          );
+        }
+      );
   };
 
   return (
     <div className="home-container">
-
-      {/* Oval shape behind content */}
       <div className="home-oval-shape"></div>
 
-      {showPopup && (
+      {/* Service Description Popup */}
+      {servicePopupVisible && (
         <div className="home-popup-overlay" style={{ zIndex: 10000 }}>
           <div className="home-popup">
-            <button className="home-popup-close" onClick={closePopup}>×</button>
-            <div className="home-popup-content">{popupContent}</div>
+            <button className="home-popup-close" onClick={closeServicePopup}>×</button>
+            <div className="home-popup-content">{servicePopupContent}</div>
+          </div>
+        </div>
+      )}
+
+      {/* Contact Success/Error Popup */}
+      {contactPopupVisible && (
+        <div className="home-contact-popup-overlay" style={{ zIndex: 11000 }}>
+          <div className="home-contact-popup">
+            <button className="home-contact-popup-close" onClick={closeContactPopup}>×</button>
+            <div className="home-contact-popup-content">{contactPopupContent}</div>
           </div>
         </div>
       )}
@@ -85,13 +153,13 @@ const Home = () => {
           <div className="home-service-text">
             <h2 className="home-service-title">AI-Powered Career Counsellor</h2>
             <p className="home-career-description">
-              AI-Powered Career Counselor – Access expert career advice and skill 
+              AI-Powered Career Counselor – Access expert career advice and skill
               development suggestions through our intuitive chatbot. Shape your future with personalized support.
             </p>
             <button
               className="home-read-more-btn"
               onClick={() =>
-                handleReadMore(
+                openServicePopup(
                   <div>
                     <h2>AI-Powered Career Counsellor</h2>
                     <p>
@@ -132,42 +200,42 @@ const Home = () => {
           <div className="home-dash-text">
             <h2 className="home-dash-title">Real-Time Career Trends</h2>
             <p className="home-dash-description">
-              Stay ahead of the curve with live updates on which careers are trending. 
-              Our platform uses AI-driven analytics to show what job roles are in demand, 
-              making it easier for students and professionals to align their skills with 
+              Stay ahead of the curve with live updates on which careers are trending.
+              Our platform uses AI-driven analytics to show what job roles are in demand,
+              making it easier for students and professionals to align their skills with
               real-world opportunities.
             </p>
             <button
               className="home-read-more-btn"
               onClick={() =>
-                handleReadMore(
+                openServicePopup(
                   <div>
                     <h2>Real-Time Career Trends</h2>
                     <p>
-                      The Real-Time Career Trends feature transforms raw search and market 
-                      data into actionable insights, helping users understand which careers 
+                      The Real-Time Career Trends feature transforms raw search and market
+                      data into actionable insights, helping users understand which careers
                       are gaining momentum and which ones are steady or declining.
                     </p>
 
                     <h4>Key Insights Provided:</h4>
                     <ul>
                       <li>
-                        <strong>Top Career Search Volume:</strong> A bar chart ranking 
-                        the most-searched careers like <em>AI Engineer</em>, 
-                        <em>Data Scientist</em>, and <em>UX Designer</em>, providing a clear 
+                        <strong>Top Career Search Volume:</strong> A bar chart ranking
+                        the most-searched careers like <em>AI Engineer</em>,
+                        <em>Data Scientist</em>, and <em>UX Designer</em>, providing a clear
                         snapshot of interest levels.
                       </li>
                       <li>
-                        <strong>Career Trend Distribution:</strong> A donut chart showing 
-                        how user interest is distributed across different professions, 
+                        <strong>Career Trend Distribution:</strong> A donut chart showing
+                        how user interest is distributed across different professions,
                         helping students spot emerging fields.
                       </li>
                       <li>
-                        <strong>Career Analytics Summary:</strong> A quick-view panel with 
+                        <strong>Career Analytics Summary:</strong> A quick-view panel with
                         role descriptions, search stats, and icons for easy understanding.
                       </li>
                       <li>
-                        <strong>Summary Table:</strong> A structured list of trending 
+                        <strong>Summary Table:</strong> A structured list of trending
                         careers, search volume, and descriptions, perfect for quick reference.
                       </li>
                     </ul>
@@ -180,8 +248,8 @@ const Home = () => {
                     </ul>
 
                     <p>
-                      By combining graphs, charts, and AI analysis, this feature keeps career 
-                      planning relevant and data-driven — empowering users to make informed 
+                      By combining graphs, charts, and AI analysis, this feature keeps career
+                      planning relevant and data-driven — empowering users to make informed
                       decisions based on real-time trends.
                     </p>
                   </div>
@@ -209,7 +277,7 @@ const Home = () => {
             <button
               className="home-read-more-btn"
               onClick={() =>
-                handleReadMore(
+                openServicePopup(
                   <div>
                     <h2>Resume Builder</h2>
                     <p>
@@ -244,11 +312,11 @@ const Home = () => {
             <button
               className="home-read-more-btn"
               onClick={() =>
-                handleReadMore(
+                openServicePopup(
                   <div>
                     <h2>Career Predictor</h2>
                     <p>
-                      The Career Predictor uses AI to examine the CV students upload, scanning through their education, skills, work history, and accomplishments to identify the most suitable career matches. 
+                      The Career Predictor uses AI to examine the CV students upload, scanning through their education, skills, work history, and accomplishments to identify the most suitable career matches.
                     </p>
                     <h4>Key Features:</h4>
                     <ul>
@@ -272,20 +340,21 @@ const Home = () => {
         </div>
 
         {/* Contact Section */}
-        <h1 className="Contacttitle">
-          Contact <span className="Us">Us</span>
+        <h1 className="contactus-title">
+          Contact <span className="contactus-highlight">Us</span>
         </h1>
-        <div id="contact" className="home-contact-section">
-          <div className="home-form-wrapper">
-            <form className="home-contact-form">
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Your Email" />
-              <input type="text" placeholder="Your Number" />
-              <textarea placeholder="Your Message" rows="4" />
+        <div id="contact" className="contactus-section">
+          <div className="contactus-wrapper">
+            <form className="contactus-form" ref={form} onSubmit={sendEmail}>
+              <input type="text" name="user_name" placeholder="Your Name" required />
+              <input type="email" name="user_email" placeholder="Your Email" required />
+              <input type="text" name="user_number" placeholder="Your Number" />
+              <textarea name="message" placeholder="Your Message" rows="4" required />
               <button type="submit">Submit</button>
             </form>
-            <div className="home-contact-image-wrapper">
-              <img src={contactIllustration} alt="Contact" className="home-contact-image" />
+
+            <div className="contactus-image-wrapper">
+              <img src={contactIllustration} alt="Contact" className="contactus-image" />
             </div>
           </div>
         </div>
