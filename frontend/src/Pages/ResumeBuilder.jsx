@@ -131,7 +131,7 @@ const ResumeBuilder = () => {
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container-resume">
       <Sidebar />
       <div className="resume-builder-container">
         {/* Hero Section */}
@@ -140,7 +140,7 @@ const ResumeBuilder = () => {
           <div className="container">
             <div className="hero-grid">
               <div className="hero-content">
-                <h1 className="hero-title">
+                <h1 className="hero-title-resume">
                   Build Your Perfect Resume
                 </h1>
                 <p className="hero-description">
@@ -167,8 +167,8 @@ const ResumeBuilder = () => {
         {/* Features Section */}
         <div className="features-section">
           <div className="container">
-            <div className="features-header">
-              <h2 className="features-title">
+            <div className="features-header-resume">
+              <h2 className="features-title-resume">
                 Why Choose Our Resume Builder?
               </h2>
               <p className="features-description">
@@ -193,7 +193,7 @@ const ResumeBuilder = () => {
         <div className="cta-section">
           <div className="container">
             <div className="cta-card">
-              <h3 className="cta-title">Ready to Get Started?</h3>
+              <h3 className="cta-title-resume">Ready to Get Started?</h3>
               <p className="cta-description">
                 Join thousands of professionals who have already created their perfect resume with our builder.
               </p>
