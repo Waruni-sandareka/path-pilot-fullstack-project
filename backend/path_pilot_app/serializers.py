@@ -3,6 +3,10 @@ from rest_framework import serializers
 import logging
 from .models import CareerAssessment
 from .models import AcademicRecord
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 User = get_user_model()
 
@@ -109,6 +113,7 @@ class AcademicRecordSerializer(serializers.ModelSerializer):
         return AcademicRecord.objects.create(user=user, **validated_data)
 
     def update(self, instance, validated_data):
+        logger.info(f"Updating instance with: {validated_data}")
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
