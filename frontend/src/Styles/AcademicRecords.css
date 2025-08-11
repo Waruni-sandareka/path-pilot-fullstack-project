@@ -270,7 +270,7 @@
   .form-select:focus,
   .form-textarea:focus {
     outline: none;
-    border-color: #8b5a8b;
+    border-color: #845ba5;
     box-shadow: 0 0 0 3px rgba(139, 90, 139, 0.1);
     background: rgba(255, 255, 255, 1);
     transform: translateY(-1px);
@@ -368,83 +368,101 @@
     font-size: 1.1rem;
   }
   
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: all 0.5s ease;
-  }
-  
-  .btn:hover::before {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .btn-primary {
-    background: linear-gradient(135deg, #8b5a8b, #b49cb4);
-    color: white;
-    box-shadow: 0 4px 15px rgba(139, 90, 139, 0.3);
-  }
-  
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(139, 90, 139, 0.4);
-  }
-  
-  .btn-outline {
-    background: rgba(255, 255, 255, 0.9);
-    color: #8b5a8b;
-    border: 2px solid rgba(139, 90, 139, 0.3);
-    padding-right: 8rem;
-  }
-  
-  .btn-outline:hover {
-    background: rgba(139, 90, 139, 0.1);
-    border-color: #8b5a8b;
-    transform: translateY(-1px);
-  }
-  
-  .btn-destructive {
-    background: linear-gradient(135deg, #d87093, #dda0b8);
-    color: white;
-  }
-  
-  .btn-destructive:hover {
-    background: linear-gradient(135deg, #c5607d, #d190a5);
-    transform: scale(1.05);
-  }
-  
-  .btn-icon {
-    padding: 0.5rem;
-    min-width: auto;
-  }
-  
-  .icon {
-    width: 16px;
-    height: 16px;
-  }
+  /* Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Ensure horizontal centering */
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px; /* Consistent with form inputs */
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1; /* Normalize line-height for text centering */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box; /* Include padding/border in size */
+  text-align: center; /* Fallback for text alignment */
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #8b5a8b, #b49cb4);
+  color: white;
+  box-shadow: 0 4px 15px rgba(139, 90, 139, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 90, 139, 0.4);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.9);
+  color: #8b5a8b;
+  border: 2px solid rgba(139, 90, 139, 0.3);
+  padding: 0.75rem 1.5rem; /* Override previous padding-right: 8rem for centering */
+}
+
+.btn-outline:hover {
+  background: rgba(139, 90, 139, 0.1);
+  border-color: #8b5a8b;
+  transform: translateY(-1px);
+}
+
+.btn-destructive {
+  background: linear-gradient(135deg, #d87093, #dda0b8);
+  color: white;
+  border-radius: 12px; /* Match other buttons and form inputs */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 32px; /* Match form input height */
+  line-height: 1; /* Ensure icon/text alignment */
+}
+
+.btn-destructive:hover {
+  background: linear-gradient(135deg, #c5607d, #d190a5);
+  transform: scale(1.05);
+}
+
+.btn-destructive.btn-icon {
+  padding: 0; /* Remove padding to center icon tightly */
+  width: 32px; /* Fixed width for icon */
+  height: 32px; /* Fixed height for alignment */
+  min-width: 0; /* Override any inherited min-width */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  display: block; /* Ensure icon is treated as a block for centering */
+}
   
   .badge-container {
     display: flex;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Upload, FileText, MessageCircle, Zap, Target, TrendingUp, CheckCircle, AlertCircle } from 'lucide-react';
 import Sidebar from '../Components/Sidebar';
@@ -12,6 +13,7 @@ const CVUpload = () => {
   const [chatResult, setChatResult] = useState(null);
   const [chatError, setChatError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files?.[0];
@@ -19,7 +21,7 @@ const CVUpload = () => {
       setFile(selectedFile);
       setJobResult(null);
       setJobError(null);
-      alert(`${selectedFile.name} is ready for analysis`); // Replace toast with alert for simplicity
+      alert(`${selectedFile.name} is ready for analysis`);
     }
   };
 
@@ -78,6 +80,10 @@ const CVUpload = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleBackToDashboard = () => {
+    navigate('/dashboard');
   };
 
   return (
@@ -163,6 +169,15 @@ const CVUpload = () => {
                         )}
                       </div>
                     </div>
+                    <button
+                      onClick={handleBackToDashboard}
+                      className="dashboard-button"
+                    >
+                      <div className="button-content">
+                        <Target className="icon small" />
+                        Back to Dashboard
+                      </div>
+                    </button>
                   </div>
                 )}
 
@@ -256,33 +271,33 @@ const CVUpload = () => {
 
           {/* Features Section */}
           <div className="features-section">
-                <div className="features-grid">
-            {[
-              {
-                icon: Target,
-                title: "AI-Powered Analysis",
-                description: "Advanced algorithms analyze your CV to predict the most suitable job roles"
-              },
-              {
-                icon: TrendingUp,
-                title: "Market Insights",
-                description: "Get insights based on current job market trends and industry demands"
-              },
-              {
-                icon: MessageCircle,
-                title: "Expert Guidance",
-                description: "Receive personalized career advice and skill development recommendations"
-              }
-            ].map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-icon">
-                  <feature.icon className="icon" />
+            <div className="features-grid">
+              {[
+                {
+                  icon: Target,
+                  title: "AI-Powered Analysis",
+                  description: "Advanced algorithms analyze your CV to predict the most suitable job roles"
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Market Insights",
+                  description: "Get insights based on current job market trends and industry demands"
+                },
+                {
+                  icon: MessageCircle,
+                  title: "Expert Guidance",
+                  description: "Receive personalized career advice and skill development recommendations"
+                }
+              ].map((feature, index) => (
+                <div key={index} className="feature-card">
+                  <div className="feature-icon">
+                    <feature.icon className="icon" />
+                  </div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
                 </div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
