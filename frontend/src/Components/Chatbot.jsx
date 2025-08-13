@@ -124,13 +124,13 @@ const ChatBot = () => {
             <div className={`chat-message ${msg.sender}`} key={index}>
               {msg.sender === 'bot' && <span className="emoji">🤖</span>}
               <div className={`message-card ${msg.sender === 'user' ? 'user-card' : ''}`}>
-                <div className="message-content">
+                <div className="message-content-chatbot">
                   {msg.sender === 'bot' ? (
                     <ReactMarkdown
                       components={{
-                        h3: ({ node, ...props }) => <h3 className="section-title" {...props} />,
-                        ul: ({ node, ...props }) => <ul className="bullet-list" {...props} />,
-                        li: ({ node, ...props }) => <li className="bullet-item" {...props} />,
+                        h4: ({ node, ...props }) => <h3 className="section-title-chatbot" {...props} />,
+                        ul: ({ node, ...props }) => <ul className="bullet-list-chatbot" {...props} />,
+                        li: ({ node, ...props }) => <li className="bullet-item-chatbot" {...props} />,
                       }}
                     >
                       {index === animatedIndex ? animatedText || msg.text : msg.text}
